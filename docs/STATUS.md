@@ -88,3 +88,16 @@ extração sem áudio. Instalador, ZIP, checksums e manifests de ferramentas ane
 https://github.com/Toled0o/CrashSounds/releases/tag/v0.4.1.
 Os testes auditivos e a disponibilidade de links/sites continuam como verificações
 manuais; a leitura do exemplo público não equivale a homologar qualquer site.
+
+## Correções de abertura e aviso — 0.5.0
+
+O X encerra o app. Atalho manual envia show/downloads por QLocalServer com
+acesso restrito ao usuário, por perfil; QLockFile continua impedindo duas instâncias.
+Compatibilidade com janela das versões antigas por PID exato, sem matar processos.
+Parar sons mantém o motor e exibe aviso por 2,5 s; o problema relatado era só texto
+persistente, não áudio preso. Baixar por link aparece também no topo.
+
+Validação: Ruff e 107 testes aprovados, incluindo IPC entre processos, aviso
+expirando em loop Qt e fechamento que sai do loop e oculta a bandeja.
+Build local e publicação 0.5.0 em andamento. Não atualizar a instalação aberta
+por cima do EXE: versões antigas precisam de Sair no menu da bandeja.

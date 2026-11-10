@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ecodeck"
-version = "0.4.1"
+version = "0.5.0"
 description = "Seu som, na hora certa. Soundboard livre para Windows."
 readme = "README.md"
 requires-python = ">=3.11,<3.14"

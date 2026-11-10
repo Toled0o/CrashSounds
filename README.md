@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="LICENSE"><img alt="Licença MIT" src="https://img.shields.io/badge/licen%C3%A7a-MIT-a78bfa"></a>
-  <a href="https://github.com/Toled0o/CrashSounds/releases"><img alt="Versão 0.4.1" src="https://img.shields.io/badge/vers%C3%A3o-0.4.1-7c3aed"></a>
+  <a href="https://github.com/Toled0o/CrashSounds/releases"><img alt="Versão 0.5.0" src="https://img.shields.io/badge/vers%C3%A3o-0.5.0-7c3aed"></a>
   <img alt="Windows x64" src="https://img.shields.io/badge/plataforma-Windows%20x64-2563eb">
   <a href="https://github.com/Toled0o/CrashSounds/actions/workflows/quality.yml"><img alt="Testes" src="https://github.com/Toled0o/CrashSounds/actions/workflows/quality.yml/badge.svg"></a>
 </p>
@@ -60,7 +60,7 @@ gravações. O app não modifica drivers ou injeta áudio diretamente em jogos.
 **Recomendado: instalador com atalho.**
 
 1. Abra [Releases](https://github.com/Toled0o/CrashSounds/releases) e baixe
-   **CrashSounds-0.4.1-setup.exe** (ou o instalador da versão mais recente).
+   **CrashSounds-0.5.0-setup.exe** (ou o instalador da versão mais recente).
 2. Execute o instalador. Ele mostra a licença MIT e instala apenas para sua
    conta em `%LOCALAPPDATA%\Programs\CrashSounds`, sem pedir administrador.
 3. Na tela de componentes, mantenha **Criar atalho na área de trabalho** marcado.
@@ -72,7 +72,7 @@ gravações. O app não modifica drivers ou injeta áudio diretamente em jogos.
 Para remover, vá a **Configurações → Aplicativos → Aplicativos instalados → CrashSounds →
 Desinstalar**. O desinstalador remove os arquivos e atalhos instalados, mas preserva
 sua biblioteca em `%LOCALAPPDATA%\EcoDeck` e arquivos adicionais que você tenha
-colocado na pasta. Feche o CrashSounds pela bandeja antes de atualizar ou desinstalar.
+colocado na pasta. Feche o CrashSounds antes de atualizar ou desinstalar. Nas versões até 0.4.1, use o menu da bandeja → **Sair**, pois o X apenas ocultava a janela.
 
 ### Se o Windows SmartScreen aparecer
 
@@ -84,7 +84,7 @@ Em um PC gerenciado, a política da organização pode impedir essa opção.
 Não é necessário desligar o antivírus.
 
 ```powershell
-Get-FileHash .\CrashSounds-0.4.1-setup.exe -Algorithm SHA256
+Get-FileHash .\CrashSounds-0.5.0-setup.exe -Algorithm SHA256
 ```
 
 ### Prefere não instalar? Use o portátil
@@ -140,7 +140,7 @@ saída de reprodução e entrada virtual podem funcionar, mas não foram homolog
 
 ## Vídeos e sons a partir de links
 
-1. Clique em **Baixar por link**, na lateral, e cole a URL HTTPS de um vídeo público.
+1. Clique em **Baixar por link**, no topo ou na lateral, e cole a URL HTTPS de um vídeo público.
 2. Escolha **Salvar vídeo MP4** para selecionar resolução e destino; ou **Trecho de
    áudio para a biblioteca** para informar início, duração (até 120 s) e categoria.
 3. Clique em **Baixar**. Acompanhe progresso/velocidade ou use **Cancelar download**.
@@ -162,7 +162,7 @@ levar até 15 minutos. Consulte [o guia completo](docs/DOWNLOADER.md).
 | Tocar pela interface | **Tocar** ou duplo clique na linha |
 | Favoritar | Estrela à esquerda |
 | Voltar da bandeja | Duplo clique no ícone ou **Abrir CrashSounds** |
-| Encerrar de verdade | Menu da bandeja → **Sair** |
+| Encerrar | **X** da janela ou menu da bandeja → **Sair** |
 
 Use Ctrl ou Alt com uma letra, número, F1–F24 ou Space. F12 é reservado pelo
 Windows. O app usa `RegisterHotKey` com `MOD_NOREPEAT` e não registra o que você
@@ -170,7 +170,7 @@ digita. Conflitos aparecem na barra inferior. Jogos com captura exclusiva ou
 apps elevados precisam ser testados caso a caso.
 
 Crie ou mova categorias editando o campo **Categoria** do som. Categorias vazias
-somem da lateral. Fechar a janela mantém áudio e atalhos na bandeja.
+somem da lateral. Fechar pelo **X** encerra o aplicativo. Abrir novamente pelo atalho traz a janela para a frente, mesmo se já houver uma instância aberta. O aviso de **Parar sons** desaparece em poucos segundos.
 
 ## Seus dados ficam com você
 
@@ -225,7 +225,7 @@ instale `pip install -e ".[dev]"` no ambiente correspondente e valide as versõe
 ```
 
 O resultado fica em `dist/CrashSounds/CrashSounds.exe`, `dist/CrashSounds-windows-x64.zip` e
-`dist/CrashSounds-0.4.1-setup.exe`. O arquivo `SHA256SUMS.txt` cobre ZIP e instalador.
+`dist/CrashSounds-0.5.0-setup.exe`. O arquivo `SHA256SUMS.txt` cobre ZIP e instalador.
 Use `python scripts/build.py --portable-only` para gerar somente o portátil.
 O build completo baixa NSIS 3.11 do projeto oficial para `.tools/` e confere
 o SHA-256 fixado antes de executar o compilador; nada é instalado globalmente.

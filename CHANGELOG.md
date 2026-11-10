@@ -2,6 +2,15 @@
 
 Mudanças relevantes do EcoDeck. Versões seguem Semantic Versioning.
 
+## [0.5.0] - 2026-11-10
+
+- O aviso de “Sons parados” desaparece após 2,5 segundos.
+- Fechar pelo X encerra o aplicativo e libera seus recursos.
+- Abrir pelo atalho restaura a instância existente, inclusive quando oculta.
+- Botão “Baixar por link” também no topo da biblioteca.
+- Opção --downloads para abrir diretamente a janela de links.
+
+
 ## [0.4.1] — 2026-11-10
 
 - Permite salvar vídeos silenciosos; validação de faixa de áudio fica restrita ao recorte.
