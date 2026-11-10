@@ -2,6 +2,15 @@
 
 Mudanças relevantes do EcoDeck. Versões seguem Semantic Versioning.
 
+## [0.2.0] — 2026-11-10
+
+- Instalador NSIS por usuário, em português, sem elevação, com licença MIT.
+- Atalho na Área de Trabalho, Menu Iniciar e início com Windows opcional.
+- Desinstalador registrado, com lista explícita de arquivos e preservação da biblioteca.
+- Portátil com scripts para criar atalho e ícone ICO em nove resoluções.
+- Sincronização do início automático do instalador com a opção no aplicativo.
+- Build de instalador/ZIP/checksums e testes de instalação/desinstalação isolados.
+
 ## [0.1.0] — 2026-11-10
 
 Primeira versão para teste no Windows.

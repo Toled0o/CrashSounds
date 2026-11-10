@@ -40,3 +40,19 @@ No pacote: `EcoDeck.exe --data-dir C:\caminho\qa-ecodeck`.
 
 QA não certifica desempenho em hardware real. Screenshot não demonstra driver
 instalado nem que o Discord recebeu áudio.
+
+## Instalador e atalho portátil (0.2)
+
+O build completo executa `scripts/smoke_installer.py`: instala silenciosamente
+com /QA em diretório temporário, valida o EXE instalado, desinstala e verifica
+que um arquivo extra do usuário foi preservado. /QA não grava Run, atalhos reais
+ou entrada de desinstalação da conta. O script compara as entradas do EcoDeck no
+registro antes/depois e cria/lê um .lnk somente em uma pasta Desktop QA temporária.
+
+Ainda testar manualmente: as telas de licença/opções, atalhos reais no Desktop
+(incluindo OneDrive) e Menu Iniciar, Aplicativos instalados, escolha de autostart,
+login e desinstalação normal. O caminho QA confirma extração/limpeza, não substitui
+esse teste interativo.
+
+O destino QA também é obrigatório na variável ECODECK_INSTALLER_QA_DIR, fornecida
+pelo script de teste ao processo filho. Sem ela, /QA aborta antes de copiar arquivos.

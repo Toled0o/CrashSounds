@@ -24,16 +24,17 @@ dados, capturas QA, cache e builds ficam fora do Git. Use a identidade configura
 
 1. Atualize `version` em `pyproject.toml`, `__version__` em `src/ecodeck/__init__.py`,
    badge no README e changelog. O workflow valida a tag contra `__version__`.
-2. Rode `python -m pytest -q`, `python -m ruff check .` e `python scripts/build.py`
+2. Rode `python -m pytest -q`, `python -m ruff check .` e `python scripts/build.py` (inclui instalador, portátil e QA de desinstalação)
    no ambiente virtual. Faça o checklist auditivo antes de anunciar estabilidade.
 3. Commit e `git push origin main`.
 4. Publique uma release com a tag correspondente, por exemplo:
 
 ```powershell
-gh release create v0.1.0 --target main --title "EcoDeck 0.1.0" --notes-file CHANGELOG.md --prerelease
+gh release create v0.2.0 --target main --title "EcoDeck 0.2.0" --notes-file docs/RELEASE-0.2.0.md --prerelease
 ```
 
-O workflow `release: published` anexa o ZIP e o SHA-256. Mantenha a primeira versão
+O workflow `release: published` anexa o instalador `*-setup.exe`, o ZIP, o SHA-256
+e o inventário do compilador NSIS. O ZIP inclui os scripts de criação de atalho. Mantenha a primeira versão
 como pré-release enquanto faltarem testes auditivos. Confira o resultado na aba
 Actions: existir uma release não significa que o build passou.
 Execução manual do workflow gera artifacts sem criar release.

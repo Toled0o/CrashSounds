@@ -1,7 +1,7 @@
 # Estado atual — EcoDeck
 
 Atualizado em 10/11/2026. Projeto independente, repositório Toled0o/EcoDeck.
-Versão 0.1.0, primeira entrega para testes (pré-release).
+Versão 0.2.0 preparada para pré-release; 0.1.0 já publicada.
 
 ## Implementado
 
@@ -65,3 +65,19 @@ git status --short
 
 Não usar sons ou perfil pessoal nos testes. Preserve o copyright por arquivo.
 Não alterar painel de buffet ou publicar dados reais como efeito deste projeto.
+
+## Entrega 0.2 — instalador e atalhos
+
+NSIS por usuário sem administrador, componentes Desktop/autostart, Menu Iniciar,
+Aplicativos instalados e desinstalação com manifesto explícito. ZIP com scripts
+de atalho; ICO com nove resoluções. A preferência de autostart é lida do registro
+ao abrir o app para refletir a escolha no instalador. Guia em INSTALLER.md.
+54 testes locais passaram. Instalador compilado e smoke isolado passaram: extração
+em caminho com espaços, codecs no EXE instalado, desinstalação preservando arquivo
+extra e atalho portátil com destino/ícone corretos. Entradas do EcoDeck no registro
+foram comparadas antes/depois, sem alterações pela execução QA.
+A invocação /D do NSIS exige caminho final sem aspas; o QA usa também destino
+obrigatório por variável de ambiente para nunca cair na instalação padrão.
+Download 0.2.0: https://github.com/Toled0o/EcoDeck/releases/tag/v0.2.0.
+Conferir conclusão do workflow e os anexos antes de anunciar a distribuição.
+O workflow da 0.1.0 terminou com sucesso e anexou ZIP/checksum.

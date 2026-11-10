@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="LICENSE"><img alt="Licença MIT" src="https://img.shields.io/badge/licen%C3%A7a-MIT-a78bfa"></a>
-  <a href="https://github.com/Toled0o/EcoDeck/releases"><img alt="Versão 0.1.0" src="https://img.shields.io/badge/vers%C3%A3o-0.1.0-7c3aed"></a>
+  <a href="https://github.com/Toled0o/EcoDeck/releases"><img alt="Versão 0.2.0" src="https://img.shields.io/badge/vers%C3%A3o-0.2.0-7c3aed"></a>
   <img alt="Windows x64" src="https://img.shields.io/badge/plataforma-Windows%20x64-2563eb">
   <a href="https://github.com/Toled0o/EcoDeck/actions/workflows/quality.yml"><img alt="Testes" src="https://github.com/Toled0o/EcoDeck/actions/workflows/quality.yml/badge.svg"></a>
 </p>
@@ -57,26 +57,54 @@ gravações. O app não modifica drivers ou injeta áudio diretamente em jogos.
 
 ## Instalação para usar
 
-1. Abra [Releases](https://github.com/Toled0o/EcoDeck/releases) e baixe
-   `EcoDeck-windows-x64.zip`. Se não houver release, use a instalação de desenvolvedor
-   ou um artifact da aba Actions.
-2. Extraia **toda a pasta** para um local permanente, como `D:\Apps\EcoDeck`.
-3. Abra `EcoDeck.exe`. O pacote pronto não precisa de Python instalado.
-4. Clique em **Adicionar sons** e selecione seus arquivos.
-5. Abra **Áudio e preferências**, escolha os fones e, se instalado, o cabo virtual.
-6. Clique em **Aplicar e ativar áudio**. Comece com os volumes baixos.
-7. Selecione uma linha e clique em **Editar** para definir o atalho e a categoria.
+**Recomendado: instalador com atalho.**
 
-Não mova o EXE sozinho: `_internal` contém as bibliotecas compartilhadas.
-O executável não tem assinatura digital; o Windows pode mostrar um aviso de
-reputação. Confira a origem e o checksum da release, sem desativar seu antivírus:
+1. Abra [Releases](https://github.com/Toled0o/EcoDeck/releases) e baixe
+   **EcoDeck-0.2.0-setup.exe** (ou o instalador da versão mais recente).
+2. Execute o instalador. Ele mostra a licença MIT e instala apenas para sua
+   conta em `%LOCALAPPDATA%\Programs\EcoDeck`, sem pedir administrador.
+3. Na tela de componentes, mantenha **Criar atalho na área de trabalho** marcado.
+   Se quiser, marque **Iniciar com o Windows**; essa opção começa desmarcada.
+4. Conclua e abra o EcoDeck pelo **atalho da Área de Trabalho** ou pelo Menu Iniciar.
+5. Adicione seus sons, escolha os dispositivos em **Áudio e preferências** e
+   clique em **Aplicar e ativar áudio**. Comece com volumes baixos.
+
+Para remover, vá a **Configurações → Aplicativos → Aplicativos instalados → EcoDeck →
+Desinstalar**. O desinstalador remove os arquivos e atalhos instalados, mas preserva
+sua biblioteca em `%LOCALAPPDATA%\EcoDeck` e arquivos adicionais que você tenha
+colocado na pasta. Feche o EcoDeck pela bandeja antes de atualizar ou desinstalar.
+
+### Se o Windows SmartScreen aparecer
+
+Como o instalador ainda não é assinado digitalmente, pode aparecer **“Windows
+protegeu seu computador”**. Confira que o arquivo veio da release oficial de
+Toled0o/EcoDeck e compare seu SHA-256 com `SHA256SUMS.txt`. Depois clique em
+**“Mais informações” → “Executar assim mesmo”**, quando essa opção estiver disponível.
+Em um PC gerenciado, a política da organização pode impedir essa opção.
+Não é necessário desligar o antivírus.
 
 ```powershell
-Get-FileHash .\EcoDeck-windows-x64.zip -Algorithm SHA256
+Get-FileHash .\EcoDeck-0.2.0-setup.exe -Algorithm SHA256
 ```
 
-Compare com `SHA256SUMS.txt`. O pacote é Windows x64; não há build ARM64 nativo.
-Para ouvir apenas nos fones, deixe a saída virtual desativada.
+### Prefere não instalar? Use o portátil
+
+1. Baixe **EcoDeck-windows-x64.zip** na mesma release.
+2. Extraia **toda a pasta** para um local permanente, como `D:\Apps\EcoDeck`.
+3. Dê dois cliques em **criar-atalho.bat**. Ele cria o atalho na Área de Trabalho
+   com o ícone do app; também funciona com Área de Trabalho redirecionada ao OneDrive.
+4. Abra pelo atalho ou diretamente por `EcoDeck.exe`.
+
+Não mova o EXE sozinho: `_internal` contém as bibliotecas compartilhadas. Se mover
+ou renomear a pasta portátil, execute criar-atalho.bat novamente. O script usa
+PowerShell apenas para criar o link, sem mudar sua política de execução permanente.
+Para remover o portátil, desmarque início automático no app, saia pela bandeja,
+apague o atalho e a pasta extraída. Nenhum Python é necessário para usar os pacotes.
+
+O ícone `assets/EcoDeck.ico` contém resoluções 16, 20, 24, 32, 40, 48, 64, 128 e
+256 px. Instalador, EXE, atalhos e bandeja usam o mesmo desenho.
+Os pacotes são Windows x64; não há build ARM64 nativo. Para ouvir só nos fones,
+deixe a saída virtual desativada.
 
 ## Microfone virtual em 5 passos
 
@@ -174,11 +202,15 @@ instale `pip install -e ".[dev]"` no ambiente correspondente e valide as versõe
 # Perfil isolado para teste manual
 .\.venv\Scripts\python.exe -m ecodeck --data-dir .\qa-artifacts\perfil-manual
 
-# Gerar o executável e o ZIP
+# Gerar executável, ZIP e instalador (NSIS baixado e validado no build)
 .\.venv\Scripts\python.exe scripts\build.py
 ```
 
-O resultado fica em `dist/EcoDeck/EcoDeck.exe` e `dist/EcoDeck-windows-x64.zip`.
+O resultado fica em `dist/EcoDeck/EcoDeck.exe`, `dist/EcoDeck-windows-x64.zip` e
+`dist/EcoDeck-0.2.0-setup.exe`. O arquivo `SHA256SUMS.txt` cobre ZIP e instalador.
+Use `python scripts/build.py --portable-only` para gerar somente o portátil.
+O build completo baixa NSIS 3.11 do projeto oficial para `.tools/` e confere
+o SHA-256 fixado antes de executar o compilador; nada é instalado globalmente.
 Não precisa de FFmpeg. O formato onedir mantém DLLs substituíveis; preserve os
 [avisos das dependências](THIRD_PARTY_NOTICES.md) ao redistribuir.
 
@@ -212,7 +244,8 @@ nunca cole tokens ou senhas no chat.
 - [ ] Gravador com prévia antes de salvar.
 - [ ] Normalização opcional, repetição e modos de disparo.
 - [ ] Melhorias de acessibilidade e captura visual de atalhos.
-- [ ] Instalador e assinatura digital, quando houver estrutura para mantê-los.
+- [x] Instalador por usuário e atalhos na Área de Trabalho/Menu Iniciar.
+- [ ] Assinatura digital, quando houver estrutura para mantê-la.
 
 ## Perguntas frequentes
 
