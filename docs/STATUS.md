@@ -35,8 +35,17 @@ ação explícita; abrir na bandeja não captura automaticamente.
   filtros/temas e registro de hotkey Win32 em janela oculta com mensagem sintética.
   Não foram injetadas teclas nem reproduzido/capturado áudio real.
 - Ruff passou e código foi formatado.
-- Primeiro build PyInstaller onedir e smoke do EXE passaram; ZIP aproximadamente
-  50 MiB. Build final e publicação são verificados na etapa de entrega.
+- Build final PyInstaller onedir e smoke do EXE passaram, incluindo decodificação
+  dos quatro formatos e SoXR dentro do pacote. ZIP local: 49,7 MiB.
+- Repositório público criado: https://github.com/Toled0o/EcoDeck. Quatro commits
+  iniciais enviados, separados por estrutura, áudio, interface e empacotamento.
+- Workflow Qualidade passou no Windows do GitHub Actions:
+  https://github.com/Toled0o/EcoDeck/actions/runs/42842312172.
+  Consulte Actions/Releases para o estado do build automático de distribuição.
+- Commits, push e pré-release explicitamente autorizados pelo usuário somente
+  para D:\EcoDeck e Toled0o/EcoDeck. A restrição do painel permanece.
+- Distribuição 0.1.0: https://github.com/Toled0o/EcoDeck/releases/tag/v0.1.0.
+  O workflow de release gera o ZIP e SHA-256; conferir sua conclusão em Actions.
 - Capturas QA nos temas claro/escuro foram inspecionadas. Não são prova auditiva.
 
 ## Pendências reais
