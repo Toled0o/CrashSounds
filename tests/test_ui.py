@@ -28,7 +28,7 @@ def window(app, tmp_path, wav):
 
 def test_smoke_both_themes_screenshot(app, tmp_path):
     output = tmp_path / "preview.png"
-    assert run_smoke(app, output) == 0
+    assert run_smoke(app, output, include_downloads=False) == 0
     assert output.stat().st_size > 1000
     assert output.with_stem("preview-light").exists()
 

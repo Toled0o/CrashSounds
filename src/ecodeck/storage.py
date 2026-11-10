@@ -54,10 +54,15 @@ class Store:
         atomic_json(self.path, validated.dump())
         self.state = validated
 
-    def add(self, path: Path, category: str = "Geral") -> Sound:
+    def add(self, path: Path, category: str = "Geral", *, name: str | None = None) -> Sound:
         validate_audio(path)
         ident = uuid.uuid4().hex
-        sound = Sound(ident, path.stem[:100], ident + path.suffix.lower(), category=category)
+        sound = Sound(
+            ident,
+            name if name is not None else path.stem[:100],
+            ident + path.suffix.lower(),
+            category=category,
+        )
         target = self.media / sound.file
         try:
             # Exclusivo: não sobrescreve outro som, mesmo em caso de colisão.

@@ -13,7 +13,7 @@ from ecodeck.storage import Store
 from ecodeck.ui import MainWindow
 
 
-def run_smoke(app, screenshot: Path | None = None) -> int:
+def run_smoke(app, screenshot: Path | None = None, *, include_downloads=True) -> int:
     # O plugin offscreen do Qt no Windows não descobre fontes do sistema sozinho.
     # Apenas carregar localmente: fontes da Microsoft não entram na distribuição.
     for name in ("segoeui.ttf", "segoeuib.ttf", "seguisym.ttf"):
@@ -87,4 +87,8 @@ def run_smoke(app, screenshot: Path | None = None) -> int:
             window.shutdown()
             window.close()
             app.processEvents()
+    if include_downloads:
+        from ecodeck.download_qa import run_download_smoke
+
+        run_download_smoke()
     return 0

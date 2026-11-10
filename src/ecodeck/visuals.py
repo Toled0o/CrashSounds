@@ -90,6 +90,8 @@ def stylesheet(theme: str) -> str:
     QSlider::groove:horizontal {{ background: {line}; height: 5px; border-radius: 2px; }}
     QSlider::sub-page:horizontal {{ background: #8b5cf6; border-radius: 2px; }}
     QSlider::handle:horizontal {{ background: #c4b5fd; width: 13px; margin: -4px 0; border-radius: 6px; }}
+    QProgressBar {{ background: {panel}; color: {foreground}; border: 1px solid {line}; border-radius: 6px; text-align: center; min-height: 20px; }}
+    QProgressBar::chunk {{ background: #7c3aed; border-radius: 5px; }}
     QCheckBox {{ spacing: 8px; padding: 6px 0; }}
     QMenu {{ background: {panel}; border: 1px solid {line}; padding: 5px; }}
     QMenu::item {{ padding: 8px 20px; }}

@@ -220,6 +220,7 @@ class MainWindow(QMainWindow):
         self.pool.setMaxThreadCount(1)
         self.pending = 0
         self.quitting = False
+        self.download_dialog = None
         self.setWindowTitle("CrashSounds — seu som, na hora certa")
         self.setWindowIcon(app_icon())
         self.resize(1180, 760)
@@ -251,6 +252,7 @@ class MainWindow(QMainWindow):
         self.categories.setFixedWidth(190)
         self.categories.currentRowChanged.connect(lambda _: self.render_table())
         sidebar.addWidget(self.categories, 1)
+        sidebar.addWidget(button("Baixar por link", self.open_downloader))
         sidebar.addWidget(button("Áudio e preferências", self.open_settings))
         sidebar.addWidget(button("Sobre o CrashSounds", self.about))
         sidebar.addWidget(label(f"v{__version__} · livre e local", "muted"))
@@ -487,6 +489,15 @@ class MainWindow(QMainWindow):
             if self.store.state.sounds
             else "Sua próxima reação começa aqui. Adicione seu primeiro som."
         )
+
+    def open_downloader(self):
+        from ecodeck.download_ui import DownloadDialog
+
+        if self.download_dialog is None:
+            self.download_dialog = DownloadDialog(self)
+        self.download_dialog.show()
+        self.download_dialog.raise_()
+        self.download_dialog.activateWindow()
 
     def add_sounds(self):
         paths, _ = QFileDialog.getOpenFileNames(
@@ -794,7 +805,7 @@ class MainWindow(QMainWindow):
             "Todos os direitos reservados nos termos da licença MIT.<br>GitHub: Toled0o</p>"
             "<p>Sem anúncios, telemetria ou conta. Sem vínculo com o Soundpad.</p>"
             "<p>Créditos: Qt/PySide6 (LGPLv3), NumPy (BSD), sounddevice/PortAudio (MIT), "
-            "SoundFile (BSD), libsndfile (LGPL), python-soxr/SoXR (LGPL). "
+            "SoundFile (BSD), libsndfile (LGPL), python-soxr/SoXR (LGPL), yt-dlp/EJS, FFmpeg e Node. "
             "Consulte THIRD_PARTY_NOTICES.md na distribuição.</p>"
             "<p>VB-CABLE é um produto externo da VB-Audio e tem licença própria.</p>",
         )
@@ -816,6 +827,8 @@ class MainWindow(QMainWindow):
         if self.quitting:
             return
         self.quitting = True
+        if self.download_dialog is not None:
+            self.download_dialog.shutdown()
         self.timer.stop()
         if self.master_timer.isActive():
             self.master_timer.stop()
