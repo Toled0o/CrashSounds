@@ -31,20 +31,17 @@ jobs:
       - run: python -m pytest -q
       - name: Gerar executável e validar QA empacotado
         run: python scripts/build.py
-      - name: Calcular SHA-256
-        shell: pwsh
-        run: |
-          $artifactHash = (Get-FileHash dist/EcoDeck-windows-x64.zip -Algorithm SHA256).Hash.ToLower()
-          "$artifactHash  EcoDeck-windows-x64.zip" | Set-Content dist/SHA256SUMS.txt -Encoding utf8
       - uses: actions/upload-artifact@v4
         with:
           name: EcoDeck-windows-x64
           path: |
             dist/EcoDeck-windows-x64.zip
+            dist/*-setup.exe
             dist/SHA256SUMS.txt
+            dist/BUILD_TOOLS.json
       - name: Anexar à release publicada
         if: github.event_name == 'release'
         env:
           GH_TOKEN: ${{ github.token }}
           RELEASE_TAG: ${{ github.event.release.tag_name }}
-        run: gh release upload "$env:RELEASE_TAG" dist/EcoDeck-windows-x64.zip dist/SHA256SUMS.txt
+        run: gh release upload "$env:RELEASE_TAG" dist/EcoDeck-windows-x64.zip dist/*-setup.exe dist/SHA256SUMS.txt dist/BUILD_TOOLS.json

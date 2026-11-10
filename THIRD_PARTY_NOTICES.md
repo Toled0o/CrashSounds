@@ -39,3 +39,10 @@ O driver **VB-CABLE** não é incluído, instalado nem modificado pelo EcoDeck.
 É um produto externo da VB-Audio, distribuído como donationware, com condições
 próprias: https://vb-audio.com/Services/licensing.htm. O EcoDeck não exige conta
 ou pagamento, mas não altera a licença de drivers externos.
+
+## Instalador NSIS
+
+O instalador 0.2 usa NSIS 3.11 e Modern UI 2, com licença própria permissiva.
+Os avisos estão em licenses/NSIS-COPYING.txt. Código e documentação oficiais:
+https://nsis.sourceforge.io/ e https://sourceforge.net/projects/nsis/files/NSIS%203/3.11/.
+O compilador é ferramenta de build; não é instalado no computador do usuário final.

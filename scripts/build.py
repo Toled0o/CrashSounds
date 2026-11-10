@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import importlib.metadata as metadata
 import json
 import shutil
@@ -23,6 +24,7 @@ def main():
         raise SystemExit("Execute o build em Windows x64 com Python 3.11–3.13.")
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, default=ROOT / "dist")
+    parser.add_argument("--portable-only", action="store_true", help="Não compilar instalador NSIS")
     args = parser.parse_args()
     output = args.output.resolve()
     build = output.parent / "build"
@@ -30,12 +32,11 @@ def main():
     # Não limpa diretórios informados pelo usuário; PyInstaller atualiza apenas seu pacote.
     from PySide6.QtWidgets import QApplication
 
-    from ecodeck.visuals import app_icon
+    from ecodeck.visuals import write_ico
 
     app = QApplication.instance() or QApplication([])
-    icon = build / "EcoDeck.ico"
-    if not app_icon().pixmap(128, 128).save(str(icon), "ICO"):
-        raise OSError("Falha ao criar ícone.")
+    icon = ROOT / "assets" / "EcoDeck.ico"
+    write_ico(icon)
     run(
         [
             sys.executable,
@@ -70,6 +71,8 @@ def main():
         shutil.copy2(ROOT / name, package / name)
     shutil.copytree(ROOT / "docs", package / "docs", dirs_exist_ok=True)
     shutil.copytree(ROOT / "assets", package / "assets", dirs_exist_ok=True)
+    for name in ("criar-atalho.ps1", "criar-atalho.bat"):
+        shutil.copy2(ROOT / "scripts" / name, package / name)
     shutil.copytree(ROOT / "licenses", package / "licenses", dirs_exist_ok=True)
     versions = {}
     # Copiar avisos inclusive de dependências transitivas e do runtime.
@@ -113,7 +116,39 @@ def main():
     # O subprocesso só usa QA: sem biblioteca real, captura, reprodução ou atalhos.
     run([str(package / "EcoDeck.exe"), "--smoke-test"])
     archive = shutil.make_archive(str(output / "EcoDeck-windows-x64"), "zip", output, "EcoDeck")
-    print(f"Build e smoke concluídos: {archive}")
+    artifacts = [Path(archive)]
+    if not args.portable_only:
+        from ecodeck import __version__
+
+        run(
+            [
+                sys.executable,
+                str(ROOT / "scripts" / "build_installer.py"),
+                "--package",
+                str(package),
+                "--output",
+                str(output),
+            ]
+        )
+        installer = output / f"EcoDeck-{__version__}-setup.exe"
+        run(
+            [
+                sys.executable,
+                str(ROOT / "scripts" / "smoke_installer.py"),
+                "--installer",
+                str(installer),
+                "--package",
+                str(package),
+            ]
+        )
+        artifacts.append(installer)
+    checksums = []
+    for artifact in artifacts:
+        with artifact.open("rb") as handle:
+            digest = hashlib.file_digest(handle, "sha256").hexdigest()
+        checksums.append(f"{digest}  {artifact.name}")
+    (output / "SHA256SUMS.txt").write_text("\n".join(checksums) + "\n", encoding="utf-8")
+    print(f"Build e validação concluídos: {archive}")
     # Manter QApplication vivo até o fim da criação do ícone.
     del app
 
