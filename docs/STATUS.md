@@ -99,5 +99,7 @@ persistente, não áudio preso. Baixar por link aparece também no topo.
 
 Validação: Ruff e 107 testes aprovados, incluindo IPC entre processos, aviso
 expirando em loop Qt e fechamento que sai do loop e oculta a bandeja.
-Build local e publicação 0.5.0 em andamento. Não atualizar a instalação aberta
+Build local 0.5.0 aprovado: EXE instalado, desinstalação e atalho portátil em QA isolado. Publicação concluída: https://github.com/Toled0o/CrashSounds/releases/tag/v0.5.0.
+Workflow de distribuição aprovado: https://github.com/Toled0o/CrashSounds/actions/runs/42878508337.
+Instalador e ZIP anexados; hashes conferidos com os digests dos assets do GitHub. Não atualizar a instalação aberta
 por cima do EXE: versões antigas precisam de Sair no menu da bandeja.
