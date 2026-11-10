@@ -9,6 +9,7 @@ from pathlib import Path
 from PySide6.QtCore import QLockFile
 from PySide6.QtWidgets import QApplication, QMessageBox, QSystemTrayIcon
 
+from ecodeck import startup
 from ecodeck.storage import Store
 from ecodeck.ui import MainWindow
 from ecodeck.visuals import app_icon
@@ -57,6 +58,8 @@ def main(argv=None) -> int:
             None, "Biblioteca não carregada", f"Seus dados foram preservados em {root}.\n\n{exc}"
         )
         return 1
+    # O instalador e a interface compartilham a entrada Run do usuário.
+    store.state.settings.start_with_windows = startup.is_enabled()
     app.setQuitOnLastWindowClosed(False)
     window = MainWindow(store)
     if not args.minimized or not QSystemTrayIcon.isSystemTrayAvailable():

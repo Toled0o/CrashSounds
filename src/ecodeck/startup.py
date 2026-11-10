@@ -7,7 +7,7 @@ import sys
 
 def command() -> str:
     if getattr(sys, "frozen", False):
-        return subprocess.list2cmdline([sys.executable, "--minimized"])
+        return f'"{sys.executable}" --minimized'
     # Usar pythonw quando disponível: não abrir console no login.
     from pathlib import Path
 
@@ -35,3 +35,21 @@ def set_enabled(enabled: bool):
                 winreg.DeleteValue(key, "EcoDeck")
             except FileNotFoundError:
                 pass
+
+
+def is_enabled() -> bool:
+    """Lê somente a entrada do EcoDeck; não altera o registro ao abrir o app."""
+    if sys.platform != "win32":
+        return False
+    import winreg
+
+    try:
+        with winreg.OpenKey(
+            winreg.HKEY_CURRENT_USER, r"Software\Microsoft\Windows\CurrentVersion\Run"
+        ) as key:
+            value, kind = winreg.QueryValueEx(key, "EcoDeck")
+        if kind != winreg.REG_SZ or not isinstance(value, str):
+            return False
+        return value.strip().casefold() == command().casefold()
+    except FileNotFoundError:
+        return False

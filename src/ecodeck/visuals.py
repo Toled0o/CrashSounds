@@ -3,11 +3,12 @@ from PySide6.QtCore import QRectF, Qt
 from PySide6.QtGui import QColor, QIcon, QPainter, QPixmap
 
 
-def app_icon() -> QIcon:
-    pixmap = QPixmap(128, 128)
+def icon_pixmap(size: int) -> QPixmap:
+    pixmap = QPixmap(size, size)
     pixmap.fill(Qt.GlobalColor.transparent)
     painter = QPainter(pixmap)
     painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+    painter.scale(size / 128, size / 128)
     painter.setPen(Qt.PenStyle.NoPen)
     painter.setBrush(QColor("#8b5cf6"))
     painter.drawRoundedRect(QRectF(4, 4, 120, 120), 30, 30)
@@ -15,7 +16,43 @@ def app_icon() -> QIcon:
     for x, height in ((30, 26), (46, 52), (62, 76), (78, 42), (94, 20)):
         painter.drawRoundedRect(QRectF(x, 64 - height / 2, 8, height), 4, 4)
     painter.end()
-    return QIcon(pixmap)
+    return pixmap
+
+
+ICON_SIZES = (16, 20, 24, 32, 40, 48, 64, 128, 256)
+
+
+def app_icon() -> QIcon:
+    icon = QIcon()
+    for size in ICON_SIZES:
+        icon.addPixmap(icon_pixmap(size))
+    return icon
+
+
+def write_ico(path):
+    """ICO com imagens PNG reais em nove resoluções, sem dependência de Pillow."""
+    import struct
+
+    from PySide6.QtCore import QBuffer, QByteArray, QIODevice
+
+    images = []
+    for size in ICON_SIZES:
+        data = QByteArray()
+        buffer = QBuffer(data)
+        buffer.open(QIODevice.OpenModeFlag.WriteOnly)
+        if not icon_pixmap(size).save(buffer, "PNG"):
+            raise OSError("Não foi possível gerar imagem do ícone.")
+        images.append((size, bytes(data)))
+    offset = 6 + 16 * len(images)
+    directory = bytearray(struct.pack("<HHH", 0, 1, len(images)))
+    for size, data in images:
+        dimension = 0 if size == 256 else size
+        directory.extend(
+            struct.pack("<BBBBHHII", dimension, dimension, 0, 0, 1, 32, len(data), offset)
+        )
+        offset += len(data)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(bytes(directory) + b"".join(data for _, data in images))
 
 
 def stylesheet(theme: str) -> str:
