@@ -265,6 +265,7 @@ class MainWindow(QMainWindow):
         heading.addWidget(label("Sua coleção de sons", "title"))
         heading.addWidget(label("Um toque. Dois destinos. Nenhuma assinatura.", "muted"))
         header.addLayout(heading, 1)
+        header.addWidget(button("Baixar por link", self.open_downloader))
         header.addWidget(button("＋ Adicionar sons", self.add_sounds, "accent"))
         main.addLayout(header)
         route_panel = QFrame()
@@ -642,9 +643,10 @@ class MainWindow(QMainWindow):
 
     def stop_sounds(self):
         self.engine.stop_all()
-        self.statusBar().showMessage(
-            "Sons interrompidos. A voz continua ativa se a mixagem estiver ligada."
-        )
+        message = "Sons parados."
+        if self.engine.running and self.store.state.settings.mix_microphone:
+            message += " Sua voz continua ativa na chamada."
+        self.statusBar().showMessage(message, 2500)
 
     def disable_audio(self):
         try:
@@ -811,17 +813,9 @@ class MainWindow(QMainWindow):
         )
 
     def closeEvent(self, event):
-        if not self.quitting and self.tray.isVisible():
-            self.hide()
-            self.tray.showMessage(
-                "CrashSounds continua na bandeja",
-                "Os atalhos e o áudio permanecem ativos. Use Sair para encerrar.",
-            )
-            event.ignore()
-        else:
-            self.shutdown()
-            event.accept()
-            QApplication.instance().quit()
+        self.shutdown()
+        event.accept()
+        QApplication.instance().quit()
 
     def shutdown(self):
         if self.quitting:
