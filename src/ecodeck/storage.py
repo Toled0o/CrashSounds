@@ -97,7 +97,7 @@ class Store:
             raise ValueError("Pacote muito grande.")
         payload = json.loads(source.read_text(encoding="utf-8"))
         if not isinstance(payload, dict) or payload.get("format") != "ecodeck-bundle-1":
-            raise ValueError("Arquivo não é uma exportação EcoDeck.")
+            raise ValueError("Arquivo não é uma exportação CrashSounds.")
         state = State.load(payload["library"])
         files = payload["files"]
         if not isinstance(files, dict) or set(files) != {s.file for s in state.sounds}:

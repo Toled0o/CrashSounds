@@ -8,7 +8,7 @@ from ecodeck.visuals import ICON_SIZES, app_icon, write_ico
 
 def test_ico_directory_contains_real_sizes_and_png_data(tmp_path):
     app = QApplication.instance() or QApplication([])
-    icon = tmp_path / "EcoDeck.ico"
+    icon = tmp_path / "CrashSounds.ico"
     write_ico(icon)
     data = icon.read_bytes()
     assert struct.unpack_from("<HHH", data) == (0, 1, len(ICON_SIZES))

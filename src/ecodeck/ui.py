@@ -220,7 +220,7 @@ class MainWindow(QMainWindow):
         self.pool.setMaxThreadCount(1)
         self.pending = 0
         self.quitting = False
-        self.setWindowTitle("EcoDeck — seu som, na hora certa")
+        self.setWindowTitle("CrashSounds — seu som, na hora certa")
         self.setWindowIcon(app_icon())
         self.resize(1180, 760)
         self.setMinimumSize(980, 620)
@@ -243,7 +243,7 @@ class MainWindow(QMainWindow):
         layout.setSpacing(26)
         sidebar = QVBoxLayout()
         sidebar.setSpacing(12)
-        sidebar.addWidget(label("◖ EcoDeck", "brand"))
+        sidebar.addWidget(label("◖ CrashSounds", "brand"))
         sidebar.addWidget(label("SEU SOM, NA HORA CERTA", "eyebrow"))
         sidebar.addSpacing(28)
         sidebar.addWidget(label("BIBLIOTECA", "eyebrow"))
@@ -252,7 +252,7 @@ class MainWindow(QMainWindow):
         self.categories.currentRowChanged.connect(lambda _: self.render_table())
         sidebar.addWidget(self.categories, 1)
         sidebar.addWidget(button("Áudio e preferências", self.open_settings))
-        sidebar.addWidget(button("Sobre o EcoDeck", self.about))
+        sidebar.addWidget(button("Sobre o CrashSounds", self.about))
         sidebar.addWidget(label(f"v{__version__} · livre e local", "muted"))
         layout.addLayout(sidebar)
         main = QVBoxLayout()
@@ -345,13 +345,13 @@ class MainWindow(QMainWindow):
 
     def build_tray(self):
         menu = QMenu(self)
-        menu.addAction("Abrir EcoDeck", self.show_window)
+        menu.addAction("Abrir CrashSounds", self.show_window)
         menu.addAction("Parar sons", self.stop_sounds)
         menu.addAction("Desativar áudio e microfone", self.disable_audio)
         menu.addSeparator()
         menu.addAction("Sair", self.quit_app)
         self.tray.setContextMenu(menu)
-        self.tray.setToolTip("EcoDeck — áudio desligado")
+        self.tray.setToolTip("CrashSounds — áudio desligado")
         self.tray.activated.connect(
             lambda reason: (
                 self.show_window()
@@ -371,7 +371,7 @@ class MainWindow(QMainWindow):
         QApplication.instance().setStyleSheet(stylesheet(self.store.state.settings.theme))
 
     def error(self, message):
-        QMessageBox.warning(self, "EcoDeck", str(message))
+        QMessageBox.warning(self, "CrashSounds", str(message))
 
     def save(self, state: State):
         self.store.commit(state)
@@ -720,7 +720,7 @@ class MainWindow(QMainWindow):
                     "Dispositivo interrompido. Confira a conexão e reative o áudio."
                 )
         self.status.setText(state)
-        self.tray.setToolTip(f"EcoDeck — {state}")
+        self.tray.setToolTip(f"CrashSounds — {state}")
 
     def register_hotkeys(self):
         if self.qa_mode:
@@ -745,8 +745,8 @@ class MainWindow(QMainWindow):
         path, _ = QFileDialog.getSaveFileName(
             self,
             "Exportar biblioteca portátil",
-            "Minha biblioteca.ecodeck.json",
-            "EcoDeck (*.ecodeck.json)",
+            "Minha biblioteca.crashsounds.json",
+            "CrashSounds (*.crashsounds.json)",
         )
         if path:
             try:
@@ -756,7 +756,9 @@ class MainWindow(QMainWindow):
                 self.error(exc)
 
     def import_library(self):
-        path, _ = QFileDialog.getOpenFileName(self, "Importar biblioteca", "", "EcoDeck (*.json)")
+        path, _ = QFileDialog.getOpenFileName(
+            self, "Importar biblioteca", "", "CrashSounds (*.json)"
+        )
         if not path:
             return
         if (
@@ -785,8 +787,8 @@ class MainWindow(QMainWindow):
     def about(self):
         QMessageBox.about(
             self,
-            "Sobre o EcoDeck",
-            f"<h2>EcoDeck {__version__}</h2>"
+            "Sobre o CrashSounds",
+            f"<h2>CrashSounds {__version__}</h2>"
             "<p>Seu som, na hora certa. Soundboard gratuito, livre e local.</p>"
             "<p>Copyright (c) 2026 Murilo Siqueira Toledo.<br>"
             "Todos os direitos reservados nos termos da licença MIT.<br>GitHub: Toled0o</p>"
@@ -801,7 +803,7 @@ class MainWindow(QMainWindow):
         if not self.quitting and self.tray.isVisible():
             self.hide()
             self.tray.showMessage(
-                "EcoDeck continua na bandeja",
+                "CrashSounds continua na bandeja",
                 "Os atalhos e o áudio permanecem ativos. Use Sair para encerrar.",
             )
             event.ignore()

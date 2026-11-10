@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ecodeck"
-version = "0.2.0"
+version = "0.3.0"
 description = "Seu som, na hora certa. Soundboard livre para Windows."
 readme = "README.md"
 requires-python = ">=3.11,<3.14"
@@ -23,6 +23,7 @@ dependencies = [
 dev = ["pytest>=8,<10", "ruff>=0.11,<1", "pyinstaller>=6.12,<7"]
 
 [project.scripts]
+crashsounds = "ecodeck.app:main"
 ecodeck = "ecodeck.app:main"
 
 [tool.setuptools.packages.find]

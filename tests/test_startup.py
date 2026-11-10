@@ -10,9 +10,9 @@ from ecodeck import startup
 @pytest.mark.parametrize(
     "registered,expected",
     [
-        ('"C:\\Apps\\EcoDeck\\EcoDeck.exe" --minimized', True),
-        ('"C:\\Other\\EcoDeck.exe" --minimized', False),
-        ('"C:\\Apps\\EcoDeck\\EcoDeck.exe" --other', False),
+        ('"C:\\Apps\\CrashSounds\\CrashSounds.exe" --minimized', True),
+        ('"C:\\Other\\CrashSounds.exe" --minimized', False),
+        ('"C:\\Apps\\CrashSounds\\CrashSounds.exe" --other', False),
     ],
 )
 def test_installer_registry_entry_is_recognized_without_writing(monkeypatch, registered, expected):
@@ -20,7 +20,7 @@ def test_installer_registry_entry_is_recognized_without_writing(monkeypatch, reg
 
     monkeypatch.setattr(startup.sys, "platform", "win32")
     monkeypatch.setattr(startup.sys, "frozen", True, raising=False)
-    monkeypatch.setattr(startup.sys, "executable", r"C:\Apps\EcoDeck\EcoDeck.exe")
+    monkeypatch.setattr(startup.sys, "executable", r"C:\Apps\CrashSounds\CrashSounds.exe")
     registry = SimpleNamespace(
         HKEY_CURRENT_USER=1,
         REG_SZ=1,

@@ -1,4 +1,4 @@
 # Copyright (c) 2026 Murilo Siqueira Toledo. Todos os direitos reservados nos termos da licença MIT.
-"""EcoDeck: soundboard local e livre."""
+"""CrashSounds: soundboard local e livre."""
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"

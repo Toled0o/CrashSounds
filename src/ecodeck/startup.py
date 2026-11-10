@@ -29,27 +29,35 @@ def set_enabled(enabled: bool):
         winreg.HKEY_CURRENT_USER, r"Software\Microsoft\Windows\CurrentVersion\Run"
     ) as key:
         if enabled:
-            winreg.SetValueEx(key, "EcoDeck", 0, winreg.REG_SZ, command())
+            winreg.SetValueEx(key, "CrashSounds", 0, winreg.REG_SZ, command())
         else:
             try:
-                winreg.DeleteValue(key, "EcoDeck")
+                winreg.DeleteValue(key, "CrashSounds")
             except FileNotFoundError:
                 pass
+        try:
+            value, kind = winreg.QueryValueEx(key, "EcoDeck")
+            if kind == winreg.REG_SZ and value.strip().casefold() == command().casefold():
+                winreg.DeleteValue(key, "EcoDeck")
+        except FileNotFoundError:
+            pass
 
 
 def is_enabled() -> bool:
-    """Lê somente a entrada do EcoDeck; não altera o registro ao abrir o app."""
+    """Lê somente a entrada do CrashSounds; não altera o registro ao abrir o app."""
     if sys.platform != "win32":
         return False
     import winreg
 
-    try:
-        with winreg.OpenKey(
-            winreg.HKEY_CURRENT_USER, r"Software\Microsoft\Windows\CurrentVersion\Run"
-        ) as key:
-            value, kind = winreg.QueryValueEx(key, "EcoDeck")
-        if kind != winreg.REG_SZ or not isinstance(value, str):
-            return False
-        return value.strip().casefold() == command().casefold()
-    except FileNotFoundError:
-        return False
+    for name in ("CrashSounds", "EcoDeck"):
+        try:
+            with winreg.OpenKey(
+                winreg.HKEY_CURRENT_USER, r"Software\Microsoft\Windows\CurrentVersion\Run"
+            ) as key:
+                value, kind = winreg.QueryValueEx(key, name)
+            if kind == winreg.REG_SZ and isinstance(value, str):
+                if value.strip().casefold() == command().casefold():
+                    return True
+        except FileNotFoundError:
+            continue
+    return False

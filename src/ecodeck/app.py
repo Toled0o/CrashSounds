@@ -15,8 +15,13 @@ from ecodeck.ui import MainWindow
 from ecodeck.visuals import app_icon
 
 
+def default_data_dir() -> Path:
+    # Manter o perfil existente: a troca de marca não move nem duplica sons.
+    return Path(os.environ.get("LOCALAPPDATA", Path.home() / ".local" / "share")) / "EcoDeck"
+
+
 def main(argv=None) -> int:
-    parser = argparse.ArgumentParser(description="EcoDeck — soundboard local para Windows")
+    parser = argparse.ArgumentParser(description="CrashSounds — soundboard local para Windows")
     parser.add_argument("--data-dir", type=Path, help="Diretório isolado para testes/perfis")
     parser.add_argument(
         "--minimized", action="store_true", help="Abrir na bandeja sem ativar captura"
@@ -31,7 +36,7 @@ def main(argv=None) -> int:
     if args.smoke_test:
         os.environ["QT_QPA_PLATFORM"] = "offscreen"
     app = QApplication.instance() or QApplication(sys.argv[:1])
-    app.setApplicationName("EcoDeck")
+    app.setApplicationName("CrashSounds")
     app.setOrganizationName("Toled0o")
     app.setStyle("Fusion")
     app.setWindowIcon(app_icon())
@@ -39,16 +44,15 @@ def main(argv=None) -> int:
         from ecodeck.qa import run_smoke
 
         return run_smoke(app, args.screenshot)
-    root = (
-        args.data_dir
-        or Path(os.environ.get("LOCALAPPDATA", Path.home() / ".local" / "share")) / "EcoDeck"
-    )
+    root = args.data_dir or default_data_dir()
     root.mkdir(parents=True, exist_ok=True)
     lock = QLockFile(str(root / "ecodeck.lock"))
     lock.setStaleLockTime(0)
     if not lock.tryLock(100):
         QMessageBox.information(
-            None, "EcoDeck já está aberto", "Abra o EcoDeck pelo ícone na bandeja do Windows."
+            None,
+            "CrashSounds já está aberto",
+            "Abra o CrashSounds pelo ícone na bandeja do Windows.",
         )
         return 0
     try:
