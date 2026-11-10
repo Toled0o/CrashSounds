@@ -1,0 +1,14 @@
+{
+  "ffmpeg": {
+    "version": "n9.0.2-47-gb204e94e90",
+    "url": "https://github.com/FFmpeg-Builds/FFmpeg-Builds/releases/download/autobuild-2026-11-05-12-48/ffmpeg-n9.0.2-47-gb204e94e90-win64-lgpl-shared-9.0.zip",
+    "sha256": "a6103833b86a94057c9d99cb8211ae7d3742153566cdbaedefeb9c5e36ca2a7c",
+    "source": "https://github.com/BtbN/FFmpeg-Builds/tree/c63bb30"
+  },
+  "node": {
+    "version": "v26.13.0",
+    "url": "https://nodejs.org/dist/v26.13.0/node-v26.13.0-win-x64.zip",
+    "sha256": "dcc60d59a0746999f99064a01c020445d54d84228c691cdbf25b49ac3b59150a",
+    "source": "https://github.com/nodejs/node/tree/v26.13.0"
+  }
+}
