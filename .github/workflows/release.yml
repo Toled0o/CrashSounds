@@ -33,9 +33,9 @@ jobs:
         run: python scripts/build.py
       - uses: actions/upload-artifact@v4
         with:
-          name: EcoDeck-windows-x64
+          name: CrashSounds-windows-x64
           path: |
-            dist/EcoDeck-windows-x64.zip
+            dist/CrashSounds-windows-x64.zip
             dist/*-setup.exe
             dist/SHA256SUMS.txt
             dist/BUILD_TOOLS.json
@@ -44,4 +44,4 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           RELEASE_TAG: ${{ github.event.release.tag_name }}
-        run: gh release upload "$env:RELEASE_TAG" dist/EcoDeck-windows-x64.zip dist/*-setup.exe dist/SHA256SUMS.txt dist/BUILD_TOOLS.json
+        run: gh release upload "$env:RELEASE_TAG" dist/CrashSounds-windows-x64.zip dist/*-setup.exe dist/SHA256SUMS.txt dist/BUILD_TOOLS.json

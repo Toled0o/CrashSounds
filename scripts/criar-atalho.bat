@@ -6,5 +6,5 @@ if errorlevel 1 (
     pause
     exit /b 1
 )
-echo Pronto. Abra o EcoDeck pelo atalho na Area de Trabalho.
+echo Pronto. Abra o CrashSounds pelo atalho na Area de Trabalho.
 pause

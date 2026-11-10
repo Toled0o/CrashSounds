@@ -9,4 +9,4 @@ from ecodeck.visuals import write_ico
 
 if __name__ == "__main__":
     app = QApplication([])
-    write_ico(Path(__file__).resolve().parents[1] / "assets" / "EcoDeck.ico")
+    write_ico(Path(__file__).resolve().parents[1] / "assets" / "CrashSounds.ico")

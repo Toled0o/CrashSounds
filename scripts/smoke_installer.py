@@ -19,7 +19,11 @@ def snapshot_registry():
     import winreg
 
     result = []
-    for key, name in ((RUN_KEY, "EcoDeck"), (UNINSTALL_KEY, "InstallLocation")):
+    for key, name in (
+        (RUN_KEY, "CrashSounds"),
+        (RUN_KEY, "EcoDeck"),
+        (UNINSTALL_KEY, "InstallLocation"),
+    ):
         try:
             with winreg.OpenKey(
                 winreg.HKEY_CURRENT_USER, key, 0, winreg.KEY_READ | winreg.KEY_WOW64_64KEY
@@ -38,22 +42,22 @@ def main():
     before = snapshot_registry()
     with tempfile.TemporaryDirectory(prefix="ecodeck-installer-qa-") as temporary:
         root = Path(temporary)
-        installed = root / "Installed EcoDeck"
+        installed = root / "Installed CrashSounds"
         # NSIS exige /D por último e sem aspas, mesmo com espaços. Usar
         # CreateProcess diretamente (shell=False), sem interpretação por shell.
         command = subprocess.list2cmdline([str(args.installer.resolve()), "/S", "/QA"])
         command += f" /D={installed}"
         environment = dict(os.environ, ECODECK_INSTALLER_QA_DIR=str(installed))
         subprocess.run(command, check=True, timeout=120, env=environment)
-        assert (installed / "EcoDeck.exe").is_file(), "Extração não gerou o executável."
-        assert (installed / "assets" / "EcoDeck.ico").is_file()
+        assert (installed / "CrashSounds.exe").is_file(), "Extração não gerou o executável."
+        assert (installed / "assets" / "CrashSounds.ico").is_file()
         assert (installed / ".ecodeck-installer-qa").is_file()
-        subprocess.run([str(installed / "EcoDeck.exe"), "--smoke-test"], check=True, timeout=60)
+        subprocess.run([str(installed / "CrashSounds.exe"), "--smoke-test"], check=True, timeout=60)
         sentinel = installed / "arquivo-do-usuario.txt"
         sentinel.write_text("Não apagar na desinstalação.", encoding="utf-8")
         subprocess.run([str(installed / "Desinstalar.exe"), "/S"], check=True, timeout=60)
         deadline = time.monotonic() + 30
-        while (installed / "EcoDeck.exe").exists() or (installed / "Desinstalar.exe").exists():
+        while (installed / "CrashSounds.exe").exists() or (installed / "Desinstalar.exe").exists():
             if time.monotonic() > deadline:
                 raise TimeoutError("Desinstalação não concluiu.")
             time.sleep(0.1)
@@ -95,7 +99,7 @@ def main():
                 "Bypass",
                 "-File",
                 str(reader),
-                str(desktop / "EcoDeck.lnk"),
+                str(desktop / "CrashSounds.lnk"),
             ],
             check=True,
             capture_output=True,
@@ -103,9 +107,9 @@ def main():
             timeout=30,
         )
         shortcut = json.loads(result.stdout)
-        assert Path(shortcut["Target"]) == package / "EcoDeck.exe"
+        assert Path(shortcut["Target"]) == package / "CrashSounds.exe"
         assert Path(shortcut["WorkingDirectory"]) == package
-        assert str(package / "assets" / "EcoDeck.ico") in shortcut["Icon"]
+        assert str(package / "assets" / "CrashSounds.ico") in shortcut["Icon"]
     assert snapshot_registry() == before, "QA alterou integração do usuário."
     print("Instalação QA, EXE instalado, desinstalação e atalho portátil: OK.")
 

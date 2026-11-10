@@ -35,7 +35,7 @@ def main():
     from ecodeck.visuals import write_ico
 
     app = QApplication.instance() or QApplication([])
-    icon = ROOT / "assets" / "EcoDeck.ico"
+    icon = ROOT / "assets" / "CrashSounds.ico"
     write_ico(icon)
     run(
         [
@@ -46,7 +46,7 @@ def main():
             "--onedir",
             "--windowed",
             "--name",
-            "EcoDeck",
+            "CrashSounds",
             "--icon",
             str(icon),
             "--distpath",
@@ -66,7 +66,7 @@ def main():
             str(ROOT / "src" / "ecodeck" / "__main__.py"),
         ]
     )
-    package = output / "EcoDeck"
+    package = output / "CrashSounds"
     for name in ("LICENSE", "README.md", "THIRD_PARTY_NOTICES.md", "CHANGELOG.md"):
         shutil.copy2(ROOT / name, package / name)
     shutil.copytree(ROOT / "docs", package / "docs", dirs_exist_ok=True)
@@ -114,8 +114,10 @@ def main():
             shutil.copy2(python_license, package / "licenses" / "PYTHON-LICENSE.txt")
     (package / "DEPENDENCIES.json").write_text(json.dumps(versions, indent=2), encoding="utf-8")
     # O subprocesso só usa QA: sem biblioteca real, captura, reprodução ou atalhos.
-    run([str(package / "EcoDeck.exe"), "--smoke-test"])
-    archive = shutil.make_archive(str(output / "EcoDeck-windows-x64"), "zip", output, "EcoDeck")
+    run([str(package / "CrashSounds.exe"), "--smoke-test"])
+    archive = shutil.make_archive(
+        str(output / "CrashSounds-windows-x64"), "zip", output, "CrashSounds"
+    )
     artifacts = [Path(archive)]
     if not args.portable_only:
         from ecodeck import __version__
@@ -130,7 +132,7 @@ def main():
                 str(output),
             ]
         )
-        installer = output / f"EcoDeck-{__version__}-setup.exe"
+        installer = output / f"CrashSounds-{__version__}-setup.exe"
         run(
             [
                 sys.executable,

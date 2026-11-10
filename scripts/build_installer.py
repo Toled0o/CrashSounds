@@ -68,8 +68,8 @@ def main():
 
     package = args.package.resolve()
     output = args.output.resolve()
-    if not (package / "EcoDeck.exe").is_file():
-        raise ValueError("Pacote EcoDeck.exe ausente.")
+    if not (package / "CrashSounds.exe").is_file():
+        raise ValueError("Pacote CrashSounds.exe ausente.")
     output.mkdir(parents=True, exist_ok=True)
     manifest = output.parent / "build" / "uninstall-files.nsh"
     manifest.parent.mkdir(parents=True, exist_ok=True)
@@ -92,7 +92,7 @@ def main():
         json.dumps({"NSIS": NSIS_VERSION, "source": NSIS_URL, "sha256": NSIS_SHA256}, indent=2),
         encoding="utf-8",
     )
-    print(f"Instalador gerado: {output / ('EcoDeck-' + __version__ + '-setup.exe')}")
+    print(f"Instalador gerado: {output / ('CrashSounds-' + __version__ + '-setup.exe')}")
 
 
 if __name__ == "__main__":
