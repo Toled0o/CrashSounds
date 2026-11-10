@@ -1,6 +1,6 @@
 # Estado atual — CrashSounds
 
-Atualizado em 10/11/2026. Versão 0.4.1 em preparação para pré-release.
+Atualizado em 10/11/2026. Versão 0.4.1 publicada como pré-release.
 Repositório: https://github.com/Toled0o/CrashSounds.
 Checkout desta sessão: D:\EcoDeck, mantido para compatibilidade do ambiente virtual.
 
@@ -78,3 +78,13 @@ yt-dlp funcionou, com 597 s e 47 formatos. Nenhum vídeo real foi salvo nesse te
 O fluxo completo permanece validado com fixtures locais; disponibilidade de
 outros links/sites e conteúdo real precisam de validação manual.
 Workflow 0.4.0: https://github.com/Toled0o/CrashSounds/actions/runs/42869424410.
+
+## Publicação 0.4.1 confirmada
+
+Workflow de distribuição concluído com sucesso, incluindo suíte e smoke no EXE:
+https://github.com/Toled0o/CrashSounds/actions/runs/42871165962.
+Build local 0.4.1 também passou, incluindo caso de vídeo silencioso e recusa de
+extração sem áudio. Instalador, ZIP, checksums e manifests de ferramentas anexados:
+https://github.com/Toled0o/CrashSounds/releases/tag/v0.4.1.
+Os testes auditivos e a disponibilidade de links/sites continuam como verificações
+manuais; a leitura do exemplo público não equivale a homologar qualquer site.
