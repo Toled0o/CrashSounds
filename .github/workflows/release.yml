@@ -1,0 +1,50 @@
+# Copyright (c) 2026 Murilo Siqueira Toledo. Todos os direitos reservados nos termos da licença MIT.
+name: Executável Windows
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+          cache-dependency-path: requirements-dev.lock
+      - name: Instalar dependências fixadas
+        run: |
+          python -m pip install --require-hashes -r requirements-dev.lock
+          python -m pip install --no-deps -e .
+      - name: Validar tag da release
+        if: github.event_name == 'release'
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: python -c "import os; from ecodeck import __version__; assert os.environ['RELEASE_TAG'] == 'v' + __version__, 'Atualize versao e tag antes de publicar'"
+      - run: python -m ruff check .
+      - run: python -m pytest -q
+      - name: Gerar executável e validar QA empacotado
+        run: python scripts/build.py
+      - name: Calcular SHA-256
+        shell: pwsh
+        run: |
+          $artifactHash = (Get-FileHash dist/EcoDeck-windows-x64.zip -Algorithm SHA256).Hash.ToLower()
+          "$artifactHash  EcoDeck-windows-x64.zip" | Set-Content dist/SHA256SUMS.txt -Encoding utf8
+      - uses: actions/upload-artifact@v4
+        with:
+          name: EcoDeck-windows-x64
+          path: |
+            dist/EcoDeck-windows-x64.zip
+            dist/SHA256SUMS.txt
+      - name: Anexar à release publicada
+        if: github.event_name == 'release'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: gh release upload "$env:RELEASE_TAG" dist/EcoDeck-windows-x64.zip dist/SHA256SUMS.txt
