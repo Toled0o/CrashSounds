@@ -2,6 +2,11 @@
 
 Mudanças relevantes do EcoDeck. Versões seguem Semantic Versioning.
 
+## [0.4.1] — 2026-11-10
+
+- Permite salvar vídeos silenciosos; validação de faixa de áudio fica restrita ao recorte.
+- Testa download de MP4 sem áudio e recusa de extração sem criar arquivo parcial.
+
 ## [0.4.0] — 2026-11-10
 
 - Janela Baixar por link: vídeo MP4 ou trecho WAV para a biblioteca.

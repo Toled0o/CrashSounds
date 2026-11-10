@@ -1,6 +1,6 @@
 # Estado atual — CrashSounds
 
-Atualizado em 10/11/2026. Versão 0.4.0 em preparação para pré-release.
+Atualizado em 10/11/2026. Versão 0.4.1 em preparação para pré-release.
 Repositório: https://github.com/Toled0o/CrashSounds.
 Checkout desta sessão: D:\EcoDeck, mantido para compatibilidade do ambiente virtual.
 
@@ -44,7 +44,7 @@ InstallLocation/entrada Run pertencem à instalação. Mais em INSTALLER.md.
 
 ## Validação
 
-102 testes passaram: áudio, biblioteca, UI, Win32 e downloads. Novos casos:
+104 testes passaram: áudio, biblioteca, UI, Win32 e downloads. Novos casos:
 URLs/limites, arquivo anterior preservado em falha, path inesperado do worker,
 protocolo inválido/timeout, cancelamento real com descendente, vídeo sintético
 HTTP em loopback/porta efêmera, recorte e importação, UI sem rede antes do clique
@@ -53,7 +53,8 @@ e importação do título sem entrada parcial em erro.
 Primeiro build 0.4 completo passou: smoke no EXE windowed e no EXE instalado,
 vídeo + áudio + biblioteca usando fixture local, desinstalação QA e atalho.
 Scripts EJS incluídos no pacote. Ajustes finais de contraste/campos por modo
-foram testados e a nova geração dos artifacts está em andamento.
+foram testados e o build 0.4.0 foi publicado com sucesso. A 0.4.1 corrige vídeo
+silencioso, com teste do caso também dentro do smoke do executável.
 
 ## Pendências reais
 
@@ -71,3 +72,9 @@ git status --short
 
 Somente o soundboard está autorizado para commits/push/releases.
 Não alterar ou versionar o painel de buffet por consequência deste projeto.
+
+Leitura de metadados do exemplo público do YouTube presente na documentação do
+yt-dlp funcionou, com 597 s e 47 formatos. Nenhum vídeo real foi salvo nesse teste.
+O fluxo completo permanece validado com fixtures locais; disponibilidade de
+outros links/sites e conteúdo real precisam de validação manual.
+Workflow 0.4.0: https://github.com/Toled0o/CrashSounds/actions/runs/42869424410.

@@ -181,7 +181,7 @@ def options(request: DownloadRequest, workspace: Path, tools: Path, report):
     else:
         height = request.height
         result["format"] = (
-            f"bv[ext=mp4][height<=?{height}]+ba[ext=m4a]/b[ext=mp4][height<=?{height}]"
+            f"bv[ext=mp4][height<=?{height}]+ba[ext=m4a]/b[ext=mp4][height<=?{height}]/bv[ext=mp4][height<=?{height}]"
         )
         result["merge_output_format"] = "mp4"
     return result
@@ -224,7 +224,7 @@ def download(request: DownloadRequest, workspace: Path, *, fixture=False, report
     if not 0 < duration <= MAX_SOURCE_SECONDS + 1:
         raise DownloadFailure("Use um vídeo com duração de até uma hora.")
     streams = meta.get("streams", [])
-    if not any(s.get("codec_type") == "audio" for s in streams):
+    if request.mode == "audio" and not any(s.get("codec_type") == "audio" for s in streams):
         raise DownloadFailure("Este vídeo não contém uma faixa de áudio.")
     if request.mode == "video":
         video = [s for s in streams if s.get("codec_type") == "video"]

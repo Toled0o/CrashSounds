@@ -37,3 +37,30 @@ def test_http_failure_does_not_replace_existing_file(tmp_path):
             )
     assert destination.read_bytes() == b"old-file"
     assert not list(tmp_path.glob("crashsounds-download-*"))
+
+
+@pytest.mark.parametrize("mode", ["video", "audio"])
+def test_silent_video_can_be_saved_but_cannot_be_imported_as_audio(tmp_path, mode):
+    make_fixture(tmp_path, silent=True)
+    destination = tmp_path / ("saved.mp4" if mode == "video" else "saved.wav")
+    with fixture_server(tmp_path) as url:
+        if mode == "video":
+            result = run_download(
+                DownloadRequest(url, mode=mode, height=360),
+                destination,
+                lambda _: None,
+                threading.Event(),
+                fixture=True,
+            )
+            assert result.path.is_file()
+        else:
+            with pytest.raises(DownloadFailure, match="áudio"):
+                run_download(
+                    DownloadRequest(url, mode=mode, duration=1),
+                    destination,
+                    lambda _: None,
+                    threading.Event(),
+                    fixture=True,
+                )
+            assert not destination.exists()
+    assert not list(tmp_path.glob("crashsounds-download-*"))

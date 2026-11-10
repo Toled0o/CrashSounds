@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="LICENSE"><img alt="Licença MIT" src="https://img.shields.io/badge/licen%C3%A7a-MIT-a78bfa"></a>
-  <a href="https://github.com/Toled0o/CrashSounds/releases"><img alt="Versão 0.4.0" src="https://img.shields.io/badge/vers%C3%A3o-0.4.0-7c3aed"></a>
+  <a href="https://github.com/Toled0o/CrashSounds/releases"><img alt="Versão 0.4.1" src="https://img.shields.io/badge/vers%C3%A3o-0.4.1-7c3aed"></a>
   <img alt="Windows x64" src="https://img.shields.io/badge/plataforma-Windows%20x64-2563eb">
   <a href="https://github.com/Toled0o/CrashSounds/actions/workflows/quality.yml"><img alt="Testes" src="https://github.com/Toled0o/CrashSounds/actions/workflows/quality.yml/badge.svg"></a>
 </p>
@@ -60,7 +60,7 @@ gravações. O app não modifica drivers ou injeta áudio diretamente em jogos.
 **Recomendado: instalador com atalho.**
 
 1. Abra [Releases](https://github.com/Toled0o/CrashSounds/releases) e baixe
-   **CrashSounds-0.4.0-setup.exe** (ou o instalador da versão mais recente).
+   **CrashSounds-0.4.1-setup.exe** (ou o instalador da versão mais recente).
 2. Execute o instalador. Ele mostra a licença MIT e instala apenas para sua
    conta em `%LOCALAPPDATA%\Programs\CrashSounds`, sem pedir administrador.
 3. Na tela de componentes, mantenha **Criar atalho na área de trabalho** marcado.
@@ -84,7 +84,7 @@ Em um PC gerenciado, a política da organização pode impedir essa opção.
 Não é necessário desligar o antivírus.
 
 ```powershell
-Get-FileHash .\CrashSounds-0.4.0-setup.exe -Algorithm SHA256
+Get-FileHash .\CrashSounds-0.4.1-setup.exe -Algorithm SHA256
 ```
 
 ### Prefere não instalar? Use o portátil
@@ -225,7 +225,7 @@ instale `pip install -e ".[dev]"` no ambiente correspondente e valide as versõe
 ```
 
 O resultado fica em `dist/CrashSounds/CrashSounds.exe`, `dist/CrashSounds-windows-x64.zip` e
-`dist/CrashSounds-0.4.0-setup.exe`. O arquivo `SHA256SUMS.txt` cobre ZIP e instalador.
+`dist/CrashSounds-0.4.1-setup.exe`. O arquivo `SHA256SUMS.txt` cobre ZIP e instalador.
 Use `python scripts/build.py --portable-only` para gerar somente o portátil.
 O build completo baixa NSIS 3.11 do projeto oficial para `.tools/` e confere
 o SHA-256 fixado antes de executar o compilador; nada é instalado globalmente.
