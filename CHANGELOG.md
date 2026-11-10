@@ -2,6 +2,15 @@
 
 Mudanças relevantes do EcoDeck. Versões seguem Semantic Versioning.
 
+## [0.4.0] — 2026-11-10
+
+- Janela Baixar por link: vídeo MP4 ou trecho WAV para a biblioteca.
+- Resolução, início, duração, categoria, progresso, velocidade e cancelamento.
+- Worker isolado com Job Object, timeout, limites de mídia e salvamento atômico.
+- yt-dlp/EJS, FFmpeg LGPL compartilhado e Node incluídos no pacote.
+- Testes HTTP locais, conversão, importação, falhas e encerramento de descendentes.
+- Rede apenas por solicitação explícita de download; sem cookies/contas.
+
 ## [0.3.0] — 2026-11-10
 
 - Novo nome **CrashSounds** na interface, bandeja, instalador, atalhos, downloads,

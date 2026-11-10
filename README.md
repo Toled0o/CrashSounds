@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="LICENSE"><img alt="Licença MIT" src="https://img.shields.io/badge/licen%C3%A7a-MIT-a78bfa"></a>
-  <a href="https://github.com/Toled0o/CrashSounds/releases"><img alt="Versão 0.3.0" src="https://img.shields.io/badge/vers%C3%A3o-0.3.0-7c3aed"></a>
+  <a href="https://github.com/Toled0o/CrashSounds/releases"><img alt="Versão 0.4.0" src="https://img.shields.io/badge/vers%C3%A3o-0.4.0-7c3aed"></a>
   <img alt="Windows x64" src="https://img.shields.io/badge/plataforma-Windows%20x64-2563eb">
   <a href="https://github.com/Toled0o/CrashSounds/actions/workflows/quality.yml"><img alt="Testes" src="https://github.com/Toled0o/CrashSounds/actions/workflows/quality.yml/badge.svg"></a>
 </p>
@@ -60,7 +60,7 @@ gravações. O app não modifica drivers ou injeta áudio diretamente em jogos.
 **Recomendado: instalador com atalho.**
 
 1. Abra [Releases](https://github.com/Toled0o/CrashSounds/releases) e baixe
-   **CrashSounds-0.3.0-setup.exe** (ou o instalador da versão mais recente).
+   **CrashSounds-0.4.0-setup.exe** (ou o instalador da versão mais recente).
 2. Execute o instalador. Ele mostra a licença MIT e instala apenas para sua
    conta em `%LOCALAPPDATA%\Programs\CrashSounds`, sem pedir administrador.
 3. Na tela de componentes, mantenha **Criar atalho na área de trabalho** marcado.
@@ -84,7 +84,7 @@ Em um PC gerenciado, a política da organização pode impedir essa opção.
 Não é necessário desligar o antivírus.
 
 ```powershell
-Get-FileHash .\CrashSounds-0.3.0-setup.exe -Algorithm SHA256
+Get-FileHash .\CrashSounds-0.4.0-setup.exe -Algorithm SHA256
 ```
 
 ### Prefere não instalar? Use o portátil
@@ -138,6 +138,21 @@ O volume geral controla os sons, não sua fala. Ao abrir o CrashSounds, mesmo pe
 automático, o áudio começa desligado até você ativá-lo. Outros drivers que exponham
 saída de reprodução e entrada virtual podem funcionar, mas não foram homologados.
 
+## Vídeos e sons a partir de links
+
+1. Clique em **Baixar por link**, na lateral, e cole a URL HTTPS de um vídeo público.
+2. Escolha **Salvar vídeo MP4** para selecionar resolução e destino; ou **Trecho de
+   áudio para a biblioteca** para informar início, duração (até 120 s) e categoria.
+3. Clique em **Baixar**. Acompanhe progresso/velocidade ou use **Cancelar download**.
+4. O vídeo fica no destino escolhido. O trecho entra na biblioteca, pronto para
+   você atribuir um atalho e tocar quando quiser.
+
+O pacote já inclui yt-dlp, FFmpeg e Node, sem comandos extras para o usuário final.
+Compatibilidade depende do site e do vídeo; não há login ou leitura de cookies.
+Um vídeo por vez, até uma hora: vídeo até 1 GiB ou fonte de áudio até 256 MiB.
+O áudio fonte pode ser baixado por inteiro antes do recorte; um trabalho pode
+levar até 15 minutos. Consulte [o guia completo](docs/DOWNLOADER.md).
+
 ## Atalhos e uso diário
 
 | Ação | Padrão |
@@ -173,8 +188,10 @@ Limites: **2.000 sons**, **120 s e 64 MiB por arquivo**, mono/estéreo,
 **128 MiB de originais por exportação**. Base64 deixa o JSON maior que os áudios.
 Cache não é a RAM total: Qt, decodificação e importação também usam memória.
 
-Não há chamadas de rede no aplicativo. GitHub, instalação de dependências e
-badges deste README usam serviços externos, fora da execução do CrashSounds.
+O soundboard e sua biblioteca funcionam offline. **Baixar por link** acessa o site
+e seus servidores de mídia somente quando você inicia um download. O CrashSounds
+não envia sua biblioteca para servidores próprios, não registra um histórico de
+URLs e não lê cookies do navegador ou contas. GitHub e badges são serviços externos.
 
 ## Instalação para desenvolver
 
@@ -195,6 +212,7 @@ instale `pip install -e ".[dev]"` no ambiente correspondente e valide as versõe
 
 ```powershell
 # Testes sem captura/reprodução em dispositivos reais
+.\.venv\Scripts\python.exe scripts/prepare_media_tools.py
 .\.venv\Scripts\python.exe -m pytest -q
 .\.venv\Scripts\python.exe -m ruff check .
 .\.venv\Scripts\python.exe -m ecodeck --smoke-test
@@ -207,11 +225,11 @@ instale `pip install -e ".[dev]"` no ambiente correspondente e valide as versõe
 ```
 
 O resultado fica em `dist/CrashSounds/CrashSounds.exe`, `dist/CrashSounds-windows-x64.zip` e
-`dist/CrashSounds-0.3.0-setup.exe`. O arquivo `SHA256SUMS.txt` cobre ZIP e instalador.
+`dist/CrashSounds-0.4.0-setup.exe`. O arquivo `SHA256SUMS.txt` cobre ZIP e instalador.
 Use `python scripts/build.py --portable-only` para gerar somente o portátil.
 O build completo baixa NSIS 3.11 do projeto oficial para `.tools/` e confere
 o SHA-256 fixado antes de executar o compilador; nada é instalado globalmente.
-Não precisa de FFmpeg. O formato onedir mantém DLLs substituíveis; preserve os
+FFmpeg e Node já acompanham os pacotes, sem instalação global. O formato onedir mantém DLLs substituíveis; preserve os
 [avisos das dependências](THIRD_PARTY_NOTICES.md) ao redistribuir.
 
 ```text
@@ -240,6 +258,7 @@ nunca cole tokens ou senhas no chat.
 - [x] Biblioteca, busca, favoritos, atalhos e duas saídas.
 - [x] Voz no cabo virtual, volumes, temas e bandeja.
 - [x] Exportação portátil e build automatizado.
+- [x] Download de vídeo por link e recorte de áudio para a biblioteca.
 - [ ] Homologação auditiva de headsets, latência, jogos e desconexões.
 - [ ] Gravador com prévia antes de salvar.
 - [ ] Normalização opcional, repetição e modos de disparo.

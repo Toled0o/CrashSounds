@@ -46,3 +46,21 @@ O instalador 0.2 usa NSIS 3.11 e Modern UI 2, com licença própria permissiva.
 Os avisos estão em licenses/NSIS-COPYING.txt. Código e documentação oficiais:
 https://nsis.sourceforge.io/ e https://sourceforge.net/projects/nsis/files/NSIS%203/3.11/.
 O compilador é ferramenta de build; não é instalado no computador do usuário final.
+
+## Download e ferramentas de mídia (0.4)
+
+- yt-dlp 2026.10.26: Unlicense; https://github.com/yt-dlp/yt-dlp.
+- yt-dlp-ejs 0.8.0: Unlicense, MIT e ISC; https://github.com/yt-dlp/ejs.
+- FFmpeg n9.0.2-47-gb204e94e90: build LGPL compartilhado. O LICENSE.txt original
+  incluído nessa distribuição é LGPLv3 e fica em tools/media/ffmpeg.
+  Fontes FFmpeg: https://github.com/FFmpeg/FFmpeg/tree/b204e94e90;
+  receitas/build: https://github.com/BtbN/FFmpeg-Builds/tree/c63bb30.
+- Node v26.13.0: MIT e avisos de terceiros no LICENSE original em tools/media/node.
+  Fontes: https://github.com/nodejs/node/tree/v26.13.0.
+- Dependências Python de rede/metadata conservam avisos em licenses/.
+
+Versões, URLs e hashes das ferramentas estão em MEDIA_TOOLS.json e
+scripts/media-tools.json. As bibliotecas FFmpeg permanecem DLLs compartilhadas
+substituíveis, e o app chama ferramentas como processos independentes.
+Não redistribuímos uma variante GPL/non-free do FFmpeg neste pacote.
+O código original do CrashSounds continua sob MIT.

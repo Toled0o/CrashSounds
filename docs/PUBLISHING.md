@@ -30,7 +30,7 @@ dados, capturas QA, cache e builds ficam fora do Git. Use a identidade configura
 4. Publique uma release com a tag correspondente, por exemplo:
 
 ```powershell
-gh release create v0.3.0 --target main --title "CrashSounds 0.3.0" --notes-file docs/RELEASE-0.3.0.md --prerelease
+gh release create v0.4.0 --target main --title "CrashSounds 0.4.0" --notes-file docs/RELEASE-0.4.0.md --prerelease
 ```
 
 O workflow `release: published` anexa o instalador `*-setup.exe`, o ZIP, o SHA-256

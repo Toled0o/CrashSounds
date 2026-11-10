@@ -1,69 +1,73 @@
 # Estado atual — CrashSounds
 
-Atualizado em 10/11/2026. Versão 0.3.0 publicada como pré-release.
+Atualizado em 10/11/2026. Versão 0.4.0 em preparação para pré-release.
 Repositório: https://github.com/Toled0o/CrashSounds.
-Checkout desta sessão: D:\EcoDeck (mantido para não quebrar o ambiente virtual).
-É o mesmo projeto antes chamado EcoDeck, com histórico e releases preservados.
+Checkout desta sessão: D:\EcoDeck, mantido para compatibilidade do ambiente virtual.
 
 ## Produto
 
-Soundboard local Windows com biblioteca MP3/WAV/OGG/FLAC, categorias, favoritos,
-busca, atalhos globais, volumes e reprodução em fones + cabo virtual. Captura
-opcional do microfone somente para a saída virtual. Temas, bandeja, início opt-in
-e importação/exportação JSON portátil. Sem rede, conta, telemetria ou driver próprio.
+Soundboard Windows com biblioteca MP3/WAV/OGG/FLAC, categorias, favoritos, busca,
+atalhos, volumes, dois destinos e captura opcional de microfone para cabo virtual.
+Temas, bandeja, autostart opt-in e backup JSON portátil. Instalador NSIS por
+usuário e ZIP com criar-atalho.bat. Sem anúncios, conta ou telemetria.
 
-Instalador NSIS por usuário sem administrador, Desktop/Menu Iniciar e opção de
-autostart. ZIP portátil com criar-atalho.bat/ps1. ICO de nove resoluções.
-Documentação de build e testes em INSTALLER.md e TESTING.md.
+## Links 0.4
 
-## Renomeação 0.3
+Baixar por link abre uma janela modeless. Vídeo MP4 até 360/720/1080p ou trecho
+WAV de 1–120 s para a biblioteca, com início e categoria. Progresso, velocidade,
+cancelamento e abrir pasta. Nenhuma reprodução/captura é iniciada pelo download.
 
-Nome visível, EXE, ícone, instalador, atalhos, banner, links e artifacts:
-CrashSounds. O módulo Python e o formato de backup mantêm o identificador ecodeck.
-Perfil permanece %LOCALAPPDATA%\EcoDeck; biblioteca e trava mantidas, sem mover
-ou copiar dados. Backups antigos continuam aceitos. Novos exports usam extensão
-.crashsounds.json. Não ler dados pessoais para testar compatibilidade.
+A biblioteca continua offline. Rede somente após o clique em Baixar, para o site
+e seus servidores de mídia. Sem cookies do navegador/netrc/contas ou componentes
+remotos EJS. URLs não são persistidas em histórico do aplicativo.
 
-A identidade de desinstalação HKCU Uninstall\EcoDeck é estável para reconhecer
-a instalação anterior. DisplayName agora é CrashSounds. O instalador remove
-binário/atalhos legados somente quando InstallLocation corresponde à pasta alvo.
-A opção de autostart é preservada quando a entrada antiga aponta ao app instalado.
-A chave Run atual é CrashSounds; aliases legados são tratados só quando pertencem
-ao próprio executável. Não excluir chaves de outra instalação.
+Worker separado pelo mesmo EXE, antes de importar Qt; pipes JSON UTF-8 com
+recuperação dos handles no build windowed. Windows Job Object encerra apenas
+o worker e descendentes desta operação. Temporários no volume do destino,
+commit atômico do arquivo, importação de áudio em uma só transação JSON.
+Um vídeo individual; sem lives/playlists; até 1 hora, 1 GiB de vídeo ou 256 MiB
+de fonte de áudio, 15 min por trabalho. Fonte pode ser baixada antes de recortar.
+
+yt-dlp/EJS, FFmpeg LGPL compartilhado e Node ficam no pacote, executados sob demanda.
+Versões/hashes/fontes em scripts/media-tools.json e requirements-dev.lock.
+prepare_media_tools.py só baixa em .tools, sem instalação global. CI prepara
+ferramentas antes da suíte e guarda os arquivos originais em cache por hash.
+Guia técnico e limites em DOWNLOADER.md.
+
+## Compatibilidade
+
+Nome visível CrashSounds. Módulo Python/formato JSON mantêm ecodeck; perfil
+%LOCALAPPDATA%\EcoDeck e trava preservados. Não mover dados nem ler perfil real
+para montar contexto. Backup antigo aceito. AppId Uninstall\EcoDeck continua
+estável; DisplayName/Run são CrashSounds. Upgrade trata legados só quando
+InstallLocation/entrada Run pertencem à instalação. Mais em INSTALLER.md.
 
 ## Validação
 
-59 testes locais passaram, com diretórios temporários, sons sintéticos, dispositivos
-falsos e registro de hotkey em janela oculta. Ruff passou. Novos testes cobrem
-perfil legado e autostart sem gravar no registro real.
+102 testes passaram: áudio, biblioteca, UI, Win32 e downloads. Novos casos:
+URLs/limites, arquivo anterior preservado em falha, path inesperado do worker,
+protocolo inválido/timeout, cancelamento real com descendente, vídeo sintético
+HTTP em loopback/porta efêmera, recorte e importação, UI sem rede antes do clique
+e importação do título sem entrada parcial em erro.
 
-Build 0.3 e smoke do instalador concluídos: EXE instalado, desinstalação preservando
-arquivo extra, atalho CrashSounds.lnk e ícone corretos em Desktop QA.
-Prévia da interface CrashSounds inspecionada nos dois temas.
-Publicação 0.3: https://github.com/Toled0o/CrashSounds/releases/tag/v0.3.0. As versões 0.1 e 0.2 passaram em Actions; a 0.2 validou
-instalação/desinstalação QA e atalho portátil com destino/ícone corretos.
-O QA do instalador exige ECODECK_INSTALLER_QA_DIR no processo filho, sem fallback
-para a pasta padrão, e não grava atalhos reais, Run ou entrada de desinstalação.
+Primeiro build 0.4 completo passou: smoke no EXE windowed e no EXE instalado,
+vídeo + áudio + biblioteca usando fixture local, desinstalação QA e atalho.
+Scripts EJS incluídos no pacote. Ajustes finais de contraste/campos por modo
+foram testados e a nova geração dos artifacts está em andamento.
 
-## Pendências
+## Pendências reais
 
-Validar auditivamente headset, cabo, Discord/jogos, latência e desconexões.
-Conferir interativamente telas/atalhos/login e atualização de instalação real 0.2.
-Gravador, normalização, instalador assinado e sincronismo de amostra não estão
-entregues. As duas saídas têm relógios independentes. Desativar áudio encerra
-captura; parar sons mantém a voz se a mixagem estiver ativa.
+Links públicos dos sites utilizados precisam de teste manual. Não prometer
+compatibilidade com qualquer site com base na fixture local; bloqueios, login
+e mudanças de extrator podem impedir download. Testar rede lenta/cancelamento,
+espaço, fechamento no download, headset/cabo/Discord/jogos e latência real.
+Gravador, assinatura digital e sincronismo em nível de amostra não entregues.
 
 ## Próximo comando seguro
 
 git status --short
+.venv\Scripts\python.exe scripts/prepare_media_tools.py
 .venv\Scripts\python.exe -m pytest -q
 
-Somente este soundboard está autorizado para commits/push/releases.
-Não versionar nem alterar o painel de buffet como consequência deste trabalho.
-
-## Publicação confirmada
-
-Workflow 0.3 concluído com sucesso, incluindo 59 testes e QA do instalador:
-https://github.com/Toled0o/CrashSounds/actions/runs/42852396451.
-Instalador CrashSounds-0.3.0-setup.exe, ZIP CrashSounds-windows-x64.zip,
-SHA256SUMS.txt e BUILD_TOOLS.json anexados à release.
+Somente o soundboard está autorizado para commits/push/releases.
+Não alterar ou versionar o painel de buffet por consequência deste projeto.

@@ -56,3 +56,15 @@ esse teste interativo.
 
 O destino QA também é obrigatório na variável ECODECK_INSTALLER_QA_DIR, fornecida
 pelo script de teste ao processo filho. Sem ela, /QA aborta antes de copiar arquivos.
+
+## Downloads 0.4
+
+Prepare ferramentas com python scripts/prepare_media_tools.py. A suíte usa vídeo
+sintético servido em 127.0.0.1/porta efêmera, sem serviço operacional. Testa URLs
+rejeitadas, playlists/lives/limites, falhas sem sobrescrever destino, cancelamento
+do worker e descendentes, conversão, biblioteca e importação atômica do título.
+O smoke do EXE repete vídeo + áudio + importação e o protocolo de pipes Win32.
+
+Ainda testar manualmente: links públicos dos sites usados, qualidade disponível,
+cancelamento em conexão lenta, espaço em disco e fechamento do app no download.
+O QA local não certifica disponibilidade de sites externos.
