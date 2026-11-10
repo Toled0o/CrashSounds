@@ -1,6 +1,6 @@
 # Estado atual — CrashSounds
 
-Atualizado em 10/11/2026. Versão 0.3.0 em preparação para pré-release.
+Atualizado em 10/11/2026. Versão 0.3.0 publicada como pré-release.
 Repositório: https://github.com/Toled0o/CrashSounds.
 Checkout desta sessão: D:\EcoDeck (mantido para não quebrar o ambiente virtual).
 É o mesmo projeto antes chamado EcoDeck, com histórico e releases preservados.
@@ -60,3 +60,10 @@ git status --short
 
 Somente este soundboard está autorizado para commits/push/releases.
 Não versionar nem alterar o painel de buffet como consequência deste trabalho.
+
+## Publicação confirmada
+
+Workflow 0.3 concluído com sucesso, incluindo 59 testes e QA do instalador:
+https://github.com/Toled0o/CrashSounds/actions/runs/42852396451.
+Instalador CrashSounds-0.3.0-setup.exe, ZIP CrashSounds-windows-x64.zip,
+SHA256SUMS.txt e BUILD_TOOLS.json anexados à release.
