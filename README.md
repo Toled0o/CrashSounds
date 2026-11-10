@@ -1,10 +1,10 @@
-<p align="center"><img src="assets/banner.svg" alt="EcoDeck — seu som, na hora certa" width="100%"></p>
+<p align="center"><img src="assets/banner.svg" alt="CrashSounds — seu som, na hora certa" width="100%"></p>
 
 <p align="center">
   <a href="LICENSE"><img alt="Licença MIT" src="https://img.shields.io/badge/licen%C3%A7a-MIT-a78bfa"></a>
-  <a href="https://github.com/Toled0o/EcoDeck/releases"><img alt="Versão 0.2.0" src="https://img.shields.io/badge/vers%C3%A3o-0.2.0-7c3aed"></a>
+  <a href="https://github.com/Toled0o/CrashSounds/releases"><img alt="Versão 0.3.0" src="https://img.shields.io/badge/vers%C3%A3o-0.3.0-7c3aed"></a>
   <img alt="Windows x64" src="https://img.shields.io/badge/plataforma-Windows%20x64-2563eb">
-  <a href="https://github.com/Toled0o/EcoDeck/actions/workflows/quality.yml"><img alt="Testes" src="https://github.com/Toled0o/EcoDeck/actions/workflows/quality.yml/badge.svg"></a>
+  <a href="https://github.com/Toled0o/CrashSounds/actions/workflows/quality.yml"><img alt="Testes" src="https://github.com/Toled0o/CrashSounds/actions/workflows/quality.yml/badge.svg"></a>
 </p>
 
 **Sua coleção de sons, pronta para a próxima conversa.** Toque reações, efeitos
@@ -13,13 +13,13 @@ e continue jogando, conversando ou trabalhando.
 
 Gratuito, open source e local. Sem anúncios, conta ou telemetria.
 
-[Releases](https://github.com/Toled0o/EcoDeck/releases) ·
+[Releases](https://github.com/Toled0o/CrashSounds/releases) ·
 [Microfone virtual](#microfone-virtual-em-5-passos) ·
 [Contribuir](CONTRIBUTING.md) · [Changelog](CHANGELOG.md)
 
 > **Primeira versão para testes.** Núcleo e interface têm testes automatizados;
 > headset, driver virtual, latência e jogos precisam de validação auditiva no seu
-> Windows. O EcoDeck não inclui nem instala drivers.
+> Windows. O CrashSounds não inclui nem instala drivers.
 
 ## Uma olhada no app
 
@@ -59,41 +59,41 @@ gravações. O app não modifica drivers ou injeta áudio diretamente em jogos.
 
 **Recomendado: instalador com atalho.**
 
-1. Abra [Releases](https://github.com/Toled0o/EcoDeck/releases) e baixe
-   **EcoDeck-0.2.0-setup.exe** (ou o instalador da versão mais recente).
+1. Abra [Releases](https://github.com/Toled0o/CrashSounds/releases) e baixe
+   **CrashSounds-0.3.0-setup.exe** (ou o instalador da versão mais recente).
 2. Execute o instalador. Ele mostra a licença MIT e instala apenas para sua
-   conta em `%LOCALAPPDATA%\Programs\EcoDeck`, sem pedir administrador.
+   conta em `%LOCALAPPDATA%\Programs\CrashSounds`, sem pedir administrador.
 3. Na tela de componentes, mantenha **Criar atalho na área de trabalho** marcado.
    Se quiser, marque **Iniciar com o Windows**; essa opção começa desmarcada.
-4. Conclua e abra o EcoDeck pelo **atalho da Área de Trabalho** ou pelo Menu Iniciar.
+4. Conclua e abra o CrashSounds pelo **atalho da Área de Trabalho** ou pelo Menu Iniciar.
 5. Adicione seus sons, escolha os dispositivos em **Áudio e preferências** e
    clique em **Aplicar e ativar áudio**. Comece com volumes baixos.
 
-Para remover, vá a **Configurações → Aplicativos → Aplicativos instalados → EcoDeck →
+Para remover, vá a **Configurações → Aplicativos → Aplicativos instalados → CrashSounds →
 Desinstalar**. O desinstalador remove os arquivos e atalhos instalados, mas preserva
 sua biblioteca em `%LOCALAPPDATA%\EcoDeck` e arquivos adicionais que você tenha
-colocado na pasta. Feche o EcoDeck pela bandeja antes de atualizar ou desinstalar.
+colocado na pasta. Feche o CrashSounds pela bandeja antes de atualizar ou desinstalar.
 
 ### Se o Windows SmartScreen aparecer
 
 Como o instalador ainda não é assinado digitalmente, pode aparecer **“Windows
 protegeu seu computador”**. Confira que o arquivo veio da release oficial de
-Toled0o/EcoDeck e compare seu SHA-256 com `SHA256SUMS.txt`. Depois clique em
+Toled0o/CrashSounds e compare seu SHA-256 com `SHA256SUMS.txt`. Depois clique em
 **“Mais informações” → “Executar assim mesmo”**, quando essa opção estiver disponível.
 Em um PC gerenciado, a política da organização pode impedir essa opção.
 Não é necessário desligar o antivírus.
 
 ```powershell
-Get-FileHash .\EcoDeck-0.2.0-setup.exe -Algorithm SHA256
+Get-FileHash .\CrashSounds-0.3.0-setup.exe -Algorithm SHA256
 ```
 
 ### Prefere não instalar? Use o portátil
 
-1. Baixe **EcoDeck-windows-x64.zip** na mesma release.
-2. Extraia **toda a pasta** para um local permanente, como `D:\Apps\EcoDeck`.
+1. Baixe **CrashSounds-windows-x64.zip** na mesma release.
+2. Extraia **toda a pasta** para um local permanente, como `D:\Apps\CrashSounds`.
 3. Dê dois cliques em **criar-atalho.bat**. Ele cria o atalho na Área de Trabalho
    com o ícone do app; também funciona com Área de Trabalho redirecionada ao OneDrive.
-4. Abra pelo atalho ou diretamente por `EcoDeck.exe`.
+4. Abra pelo atalho ou diretamente por `CrashSounds.exe`.
 
 Não mova o EXE sozinho: `_internal` contém as bibliotecas compartilhadas. Se mover
 ou renomear a pasta portátil, execute criar-atalho.bat novamente. O script usa
@@ -101,7 +101,7 @@ PowerShell apenas para criar o link, sem mudar sua política de execução perma
 Para remover o portátil, desmarque início automático no app, saia pela bandeja,
 apague o atalho e a pasta extraída. Nenhum Python é necessário para usar os pacotes.
 
-O ícone `assets/EcoDeck.ico` contém resoluções 16, 20, 24, 32, 40, 48, 64, 128 e
+O ícone `assets/CrashSounds.ico` contém resoluções 16, 20, 24, 32, 40, 48, 64, 128 e
 256 px. Instalador, EXE, atalhos e bandeja usam o mesmo desenho.
 Os pacotes são Windows x64; não há build ARM64 nativo. Para ouvir só nos fones,
 deixe a saída virtual desativada.
@@ -110,11 +110,11 @@ deixe a saída virtual desativada.
 
 O caminho recomendado é o [VB-CABLE da VB-Audio](https://vb-audio.com/Cable/index.htm).
 É um driver externo, **não é open source**, e tem [licença donationware própria](https://vb-audio.com/Services/licensing.htm),
-com condições para uso profissional. O EcoDeck é MIT e não distribui esse driver.
+com condições para uso profissional. O CrashSounds é MIT e não distribui esse driver.
 
 1. **Instale o driver:** baixe do site oficial, extraia, execute o instalador adequado
    como administrador e reinicie o Windows, conforme instruções do fabricante.
-2. **Escolha no EcoDeck:** seus fones reais em **Meus fones**, **CABLE Input** em
+2. **Escolha no CrashSounds:** seus fones reais em **Meus fones**, **CABLE Input** em
    **Saída para o cabo virtual** e o microfone do headset/USB em **Meu microfone real**.
 3. **Inclua sua voz:** marque **Misturar minha voz na saída virtual**, se quiser, e
    clique em **Aplicar e ativar áudio**. A barra inferior indica quando há captura.
@@ -134,7 +134,7 @@ de privacidade do Windows. Supressão de ruído e ganho automático do Discord p
 filtrar efeitos: ajuste essas opções durante o teste.
 
 **Parar sons mantém sua voz na chamada. Desativar áudio encerra a captura.**
-O volume geral controla os sons, não sua fala. Ao abrir o EcoDeck, mesmo pelo início
+O volume geral controla os sons, não sua fala. Ao abrir o CrashSounds, mesmo pelo início
 automático, o áudio começa desligado até você ativá-lo. Outros drivers que exponham
 saída de reprodução e entrada virtual podem funcionar, mas não foram homologados.
 
@@ -146,7 +146,7 @@ saída de reprodução e entrada virtual podem funcionar, mas não foram homolog
 | Tocar um som | Defina em **Editar**, por exemplo `Ctrl+Alt+1` |
 | Tocar pela interface | **Tocar** ou duplo clique na linha |
 | Favoritar | Estrela à esquerda |
-| Voltar da bandeja | Duplo clique no ícone ou **Abrir EcoDeck** |
+| Voltar da bandeja | Duplo clique no ícone ou **Abrir CrashSounds** |
 | Encerrar de verdade | Menu da bandeja → **Sair** |
 
 Use Ctrl ou Alt com uma letra, número, F1–F24 ou Space. F12 é reservado pelo
@@ -174,15 +174,15 @@ Limites: **2.000 sons**, **120 s e 64 MiB por arquivo**, mono/estéreo,
 Cache não é a RAM total: Qt, decodificação e importação também usam memória.
 
 Não há chamadas de rede no aplicativo. GitHub, instalação de dependências e
-badges deste README usam serviços externos, fora da execução do EcoDeck.
+badges deste README usam serviços externos, fora da execução do CrashSounds.
 
 ## Instalação para desenvolver
 
 Git e Python **3.11–3.13 x64**. O lockfile e o build foram preparados com Python 3.13.
 
 ```powershell
-git clone https://github.com/Toled0o/EcoDeck.git
-cd EcoDeck
+git clone https://github.com/Toled0o/CrashSounds.git
+cd CrashSounds
 py -3.13 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install --require-hashes -r requirements-dev.lock
 .\.venv\Scripts\python.exe -m pip install --no-deps -e .
@@ -206,8 +206,8 @@ instale `pip install -e ".[dev]"` no ambiente correspondente e valide as versõe
 .\.venv\Scripts\python.exe scripts\build.py
 ```
 
-O resultado fica em `dist/EcoDeck/EcoDeck.exe`, `dist/EcoDeck-windows-x64.zip` e
-`dist/EcoDeck-0.2.0-setup.exe`. O arquivo `SHA256SUMS.txt` cobre ZIP e instalador.
+O resultado fica em `dist/CrashSounds/CrashSounds.exe`, `dist/CrashSounds-windows-x64.zip` e
+`dist/CrashSounds-0.3.0-setup.exe`. O arquivo `SHA256SUMS.txt` cobre ZIP e instalador.
 Use `python scripts/build.py --portable-only` para gerar somente o portátil.
 O build completo baixa NSIS 3.11 do projeto oficial para `.tools/` e confere
 o SHA-256 fixado antes de executar o compilador; nada é instalado globalmente.
@@ -249,10 +249,10 @@ nunca cole tokens ou senhas no chat.
 
 ## Perguntas frequentes
 
-**Preciso pagar?** O EcoDeck não cobra. Drivers externos têm suas próprias
+**Preciso pagar?** O CrashSounds não cobra. Drivers externos têm suas próprias
 condições, especialmente para uso profissional.
 
-**Eu ouço, mas a chamada não recebe.** Confira EcoDeck → CABLE Input e Discord →
+**Eu ouço, mas a chamada não recebe.** Confira CrashSounds → CABLE Input e Discord →
 CABLE Output, os volumes e se a saída virtual está habilitada.
 
 **Há atraso ou estalos.** Usamos WASAPI compartilhado, blocos de 20 ms e buffers
@@ -264,7 +264,7 @@ Teste 48 kHz e observe os alertas na barra inferior.
 O app não redireciona silenciosamente para outro destino quando um nome desaparece.
 
 **Não inicia com o Windows.** Habilite nas preferências, mantenha a pasta no mesmo
-lugar e confira se o Windows permitiu EcoDeck em Aplicativos de inicialização.
+lugar e confira se o Windows permitiu CrashSounds em Aplicativos de inicialização.
 Desmarque a opção antes de apagar a pasta do app.
 
 **Posso compartilhar os sons?** Só quando você tem permissão para distribuir
@@ -281,3 +281,13 @@ inclusive comercialmente, preservando os termos da [LICENSE](LICENSE).
 Python, PySide6/Qt, NumPy, sounddevice/PortAudio, SoundFile/libsndfile e
 python-soxr/SoXR mantêm suas próprias licenças. Veja [os créditos completos](THIRD_PARTY_NOTICES.md).
 Sem vínculo com o Soundpad.
+
+### Atualização de EcoDeck para CrashSounds
+
+Feche o EcoDeck pela bandeja antes de atualizar. O instalador aproveita a instalação
+registrada anterior, substitui o executável/atalhos e mantém o início automático
+desta instalação. Sons e preferências continuam em %LOCALAPPDATA%\EcoDeck.
+Backups .ecodeck.json continuam aceitos. Não apague essa pasta de dados.
+
+O pacote Python interno e o formato do JSON mantêm o identificador ecodeck por
+compatibilidade. O nome exibido e os downloads agora são CrashSounds.

@@ -2,6 +2,13 @@
 
 Mudanças relevantes do EcoDeck. Versões seguem Semantic Versioning.
 
+## [0.3.0] — 2026-11-10
+
+- Novo nome **CrashSounds** na interface, bandeja, instalador, atalhos, downloads,
+  banner e repositório.
+- Compatibilidade de atualização a partir do EcoDeck, preservando sons,
+  preferências, backups e a opção de início automático desta instalação.
+
 ## [0.2.0] — 2026-11-10
 
 - Instalador NSIS por usuário, em português, sem elevação, com licença MIT.

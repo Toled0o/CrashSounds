@@ -1,4 +1,4 @@
-# Validação do EcoDeck
+# Validação do CrashSounds
 
 ## Automatizada, sem áudio real
 
@@ -22,7 +22,7 @@ registra atalhos ou modifica a inicialização. O build repete o QA dentro do EX
 
 Use volume baixo e perfil fictício:
 `python -m ecodeck --data-dir qa-artifacts/perfil-manual`.
-No pacote: `EcoDeck.exe --data-dir C:\caminho\qa-ecodeck`.
+No pacote: `CrashSounds.exe --data-dir C:\caminho\qa-ecodeck`.
 
 - [ ] Abrir o pacote em Windows x64 sem Python instalado.
 - [ ] Ouvir um arquivo real de cada formato, do início ao fim.
@@ -46,7 +46,7 @@ instalado nem que o Discord recebeu áudio.
 O build completo executa `scripts/smoke_installer.py`: instala silenciosamente
 com /QA em diretório temporário, valida o EXE instalado, desinstala e verifica
 que um arquivo extra do usuário foi preservado. /QA não grava Run, atalhos reais
-ou entrada de desinstalação da conta. O script compara as entradas do EcoDeck no
+ou entrada de desinstalação da conta. O script compara as entradas do CrashSounds no
 registro antes/depois e cria/lê um .lnk somente em uma pasta Desktop QA temporária.
 
 Ainda testar manualmente: as telas de licença/opções, atalhos reais no Desktop

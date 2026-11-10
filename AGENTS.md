@@ -1,4 +1,4 @@
-# Continuidade do EcoDeck
+# Continuidade do CrashSounds
 
 Projeto independente do painel de buffet. Código em `src/ecodeck`.
 Leia `docs/PLAN.md` e `docs/STATUS.md`; confira `git status --short`.

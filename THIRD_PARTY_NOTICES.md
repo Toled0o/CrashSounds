@@ -1,12 +1,12 @@
 # Créditos e dependências
 
-O código original do **EcoDeck** é de Murilo Siqueira Toledo, 2026, sob a licença MIT.
+O código original do **CrashSounds** é de Murilo Siqueira Toledo, 2026, sob a licença MIT.
 Soundpad é um produto de terceiros; não há afiliação, cópia de código, marca ou assets.
 Nenhum pacote de sons protegido acompanha o aplicativo.
 
 As bibliotecas mantêm suas próprias licenças. A distribuição inclui cópias dos
 avisos disponíveis nos pacotes em `licenses/`, um inventário em `DEPENDENCIES.json`
-e os textos LGPL/GPL aplicáveis. O código do EcoDeck permanece MIT.
+e os textos LGPL/GPL aplicáveis. O código do CrashSounds permanece MIT.
 
 | Componente | Licença / origem do código-fonte |
 | --- | --- |
@@ -29,15 +29,15 @@ https://download.qt.io/official_releases/QtForPython/ e https://download.qt.io/a
 
 O aplicativo usa DLLs compartilhadas, sem alterações nas bibliotecas LGPL.
 O formato de distribuição é **onedir**: mantenha a pasta `_internal` junto ao EXE.
-Você pode modificar o EcoDeck, substituir bibliotecas compatíveis e reconstruir
+Você pode modificar o CrashSounds, substituir bibliotecas compatíveis e reconstruir
 o pacote com as instruções do README. Não há bloqueio técnico nem proibição de
 engenharia reversa para depurar alterações dessas bibliotecas. Preserve os avisos
 e disponibilize as fontes e alterações correspondentes ao redistribuir versões.
 Consulte as [obrigações LGPL publicadas pelo Qt](https://www.qt.io/development/open-source-lgpl-obligations).
 
-O driver **VB-CABLE** não é incluído, instalado nem modificado pelo EcoDeck.
+O driver **VB-CABLE** não é incluído, instalado nem modificado pelo CrashSounds.
 É um produto externo da VB-Audio, distribuído como donationware, com condições
-próprias: https://vb-audio.com/Services/licensing.htm. O EcoDeck não exige conta
+próprias: https://vb-audio.com/Services/licensing.htm. O CrashSounds não exige conta
 ou pagamento, mas não altera a licença de drivers externos.
 
 ## Instalador NSIS

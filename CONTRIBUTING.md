@@ -1,7 +1,7 @@
 # Como contribuir
 
 Abra uma issue contando o que você tentou, o esperado e o que aconteceu.
-Informe Windows, versão do EcoDeck e nomes dos dispositivos; não envie sons
+Informe Windows, versão do CrashSounds e nomes dos dispositivos; não envie sons
 privados, gravações de terceiros sem permissão ou sua biblioteca pessoal.
 
 Para código: crie uma branch, prepare o ambiente do README, altere só o necessário

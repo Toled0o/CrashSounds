@@ -1,87 +1,62 @@
-# Estado atual — EcoDeck
+# Estado atual — CrashSounds
 
-Atualizado em 10/11/2026. Projeto independente, repositório Toled0o/EcoDeck.
-Versão 0.2.0 publicada como pré-release; 0.1.0 preservada no histórico.
+Atualizado em 10/11/2026. Versão 0.3.0 em preparação para pré-release.
+Repositório: https://github.com/Toled0o/CrashSounds.
+Checkout desta sessão: D:\EcoDeck (mantido para não quebrar o ambiente virtual).
+É o mesmo projeto antes chamado EcoDeck, com histórico e releases preservados.
 
-## Implementado
+## Produto
 
-Biblioteca local com cópias de arquivos e JSON atômico; MP3/WAV/OGG/FLAC;
-categorias, favoritos, busca e edição; mixer estéreo a 48 kHz com dois destinos;
-voz real apenas na saída virtual; volumes, cancelamento de playback pendente;
-atalhos RegisterHotKey; bandeja, início opt-in e temas. Exportação JSON portátil
-inclui áudios; importação valida e não ativa captura ou autostart vindo do pacote.
+Soundboard local Windows com biblioteca MP3/WAV/OGG/FLAC, categorias, favoritos,
+busca, atalhos globais, volumes e reprodução em fones + cabo virtual. Captura
+opcional do microfone somente para a saída virtual. Temas, bandeja, início opt-in
+e importação/exportação JSON portátil. Sem rede, conta, telemetria ou driver próprio.
 
-Sem gravador nesta versão. Sem servidor, rede, telemetria, conta ou driver próprio.
-VB-CABLE é externo e tem licença donationware; o código original é MIT.
+Instalador NSIS por usuário sem administrador, Desktop/Menu Iniciar e opção de
+autostart. ZIP portátil com criar-atalho.bat/ps1. ICO de nove resoluções.
+Documentação de build e testes em INSTALLER.md e TESTING.md.
 
-## Arquitetura
+## Renomeação 0.3
 
-- `models.py` valida estado, nomes, limites, caminhos e conflitos de atalhos.
-- `storage.py` faz cópia de mídia, commit atômico e import/export transacional.
-- `audio.py` contém mixers testáveis, buffer limitado de voz, cache LRU,
-  resampling SoXR e adaptadores sounddevice. Decodificação fora da thread UI.
-- `hotkeys.py` e `startup.py` encapsulam Win32 e Run do usuário, sem admin.
-- `ui.py` é a janela Qt; `app.py` trata perfil, instância única e argumentos.
-- `qa.py` exercita interface e codecs com dados temporários, sem abrir áudio.
+Nome visível, EXE, ícone, instalador, atalhos, banner, links e artifacts:
+CrashSounds. O módulo Python e o formato de backup mantêm o identificador ecodeck.
+Perfil permanece %LOCALAPPDATA%\EcoDeck; biblioteca e trava mantidas, sem mover
+ou copiar dados. Backups antigos continuam aceitos. Novos exports usam extensão
+.crashsounds.json. Não ler dados pessoais para testar compatibilidade.
 
-Saídas têm relógios independentes. Não prometer sincronismo de amostra ou latência
-fixa. Não fazer fallback de dispositivo ausente. Streams iniciam somente por
-ação explícita; abrir na bandeja não captura automaticamente.
+A identidade de desinstalação HKCU Uninstall\EcoDeck é estável para reconhecer
+a instalação anterior. DisplayName agora é CrashSounds. O instalador remove
+binário/atalhos legados somente quando InstallLocation corresponde à pasta alvo.
+A opção de autostart é preservada quando a entrada antiga aponta ao app instalado.
+A chave Run atual é CrashSounds; aliases legados são tratados só quando pertencem
+ao próprio executável. Não excluir chaves de outra instalação.
 
-## Validação local
+## Validação
 
-- Python 3.13.5, Windows 11 x64; dependências e hashes em `requirements-dev.lock`.
-- 49 testes passaram, incluindo quatro formatos, persistência, roteamento falso,
-  filtros/temas e registro de hotkey Win32 em janela oculta com mensagem sintética.
-  Não foram injetadas teclas nem reproduzido/capturado áudio real.
-- Ruff passou e código foi formatado.
-- Build final PyInstaller onedir e smoke do EXE passaram, incluindo decodificação
-  dos quatro formatos e SoXR dentro do pacote. ZIP local: 49,7 MiB.
-- Repositório público criado: https://github.com/Toled0o/EcoDeck. Quatro commits
-  iniciais enviados, separados por estrutura, áudio, interface e empacotamento.
-- Workflow Qualidade passou no Windows do GitHub Actions:
-  https://github.com/Toled0o/EcoDeck/actions/runs/42842312172.
-  Consulte Actions/Releases para o estado do build automático de distribuição.
-- Commits, push e pré-release explicitamente autorizados pelo usuário somente
-  para D:\EcoDeck e Toled0o/EcoDeck. A restrição do painel permanece.
-- Distribuição 0.1.0: https://github.com/Toled0o/EcoDeck/releases/tag/v0.1.0.
-  O workflow de release gera o ZIP e SHA-256; conferir sua conclusão em Actions.
-- Capturas QA nos temas claro/escuro foram inspecionadas. Não são prova auditiva.
+59 testes locais passaram, com diretórios temporários, sons sintéticos, dispositivos
+falsos e registro de hotkey em janela oculta. Ruff passou. Novos testes cobrem
+perfil legado e autostart sem gravar no registro real.
 
-## Pendências reais
+Build 0.3 e smoke do instalador concluídos: EXE instalado, desinstalação preservando
+arquivo extra, atalho CrashSounds.lnk e ícone corretos em Desktop QA.
+Prévia da interface CrashSounds inspecionada nos dois temas.
+Publicação 0.3: https://github.com/Toled0o/CrashSounds/releases/tag/v0.3.0. As versões 0.1 e 0.2 passaram em Actions; a 0.2 validou
+instalação/desinstalação QA e atalho portátil com destino/ícone corretos.
+O QA do instalador exige ECODECK_INSTALLER_QA_DIR no processo filho, sem fallback
+para a pasta padrão, e não grava atalhos reais, Run ou entrada de desinstalação.
 
-Checklist de hardware em `TESTING.md`: ouvir no headset, receber no Discord,
-misturar voz, medir latência, jogar minimizado, testar desconexões e login Windows.
-Não marcar como estável antes disso. Gravador, normalização, instalador e assinatura
-digital ficam no roadmap. Arquivos removidos da lista ficam órfãos no perfil para
-recuperação manual; ocupam disco. Cache de áudio limitado não é limite de RAM total.
+## Pendências
+
+Validar auditivamente headset, cabo, Discord/jogos, latência e desconexões.
+Conferir interativamente telas/atalhos/login e atualização de instalação real 0.2.
+Gravador, normalização, instalador assinado e sincronismo de amostra não estão
+entregues. As duas saídas têm relógios independentes. Desativar áudio encerra
+captura; parar sons mantém a voz se a mixagem estiver ativa.
 
 ## Próximo comando seguro
 
-```powershell
 git status --short
-.\.venv\Scripts\python.exe -m pytest -q
-```
+.venv\Scripts\python.exe -m pytest -q
 
-Não usar sons ou perfil pessoal nos testes. Preserve o copyright por arquivo.
-Não alterar painel de buffet ou publicar dados reais como efeito deste projeto.
-
-## Entrega 0.2 — instalador e atalhos
-
-NSIS por usuário sem administrador, componentes Desktop/autostart, Menu Iniciar,
-Aplicativos instalados e desinstalação com manifesto explícito. ZIP com scripts
-de atalho; ICO com nove resoluções. A preferência de autostart é lida do registro
-ao abrir o app para refletir a escolha no instalador. Guia em INSTALLER.md.
-54 testes locais passaram. Instalador compilado e smoke isolado passaram: extração
-em caminho com espaços, codecs no EXE instalado, desinstalação preservando arquivo
-extra e atalho portátil com destino/ícone corretos. Entradas do EcoDeck no registro
-foram comparadas antes/depois, sem alterações pela execução QA.
-A invocação /D do NSIS exige caminho final sem aspas; o QA usa também destino
-obrigatório por variável de ambiente para nunca cair na instalação padrão.
-Download 0.2.0: https://github.com/Toled0o/EcoDeck/releases/tag/v0.2.0.
-Workflow de distribuição concluído com sucesso:
-https://github.com/Toled0o/EcoDeck/actions/runs/42849866887.
-Instalador, ZIP portátil, SHA256SUMS.txt e BUILD_TOOLS.json anexados à 0.2.0.
-Os mesmos testes e o smoke de instalação/desinstalação passaram no GitHub.
-Os testes interativos e auditivos listados em TESTING.md continuam pendentes.
-O workflow da 0.1.0 terminou com sucesso e anexou ZIP/checksum.
+Somente este soundboard está autorizado para commits/push/releases.
+Não versionar nem alterar o painel de buffet como consequência deste trabalho.

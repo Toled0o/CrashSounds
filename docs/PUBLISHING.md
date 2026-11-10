@@ -1,6 +1,6 @@
 # GitHub, releases e continuidade
 
-Repositório: **https://github.com/Toled0o/EcoDeck**. O painel de buffet não faz parte dele.
+Repositório: **https://github.com/Toled0o/CrashSounds**. O painel de buffet não faz parte dele.
 
 ## Publicar a primeira vez
 
@@ -12,12 +12,12 @@ git status --short
 git init -b main
 git add .
 git diff --cached --stat
-git commit -m "feat: cria primeira versão do EcoDeck"
+git commit -m "feat: cria primeira versão do CrashSounds"
 gh auth login
-gh repo create Toled0o/EcoDeck --public --source . --remote origin --push
+gh repo create Toled0o/CrashSounds --public --source . --remote origin --push
 ```
 
-Execute somente dentro do EcoDeck, nunca no painel. Ambiente virtual, sons,
+Execute somente dentro do CrashSounds, nunca no painel. Ambiente virtual, sons,
 dados, capturas QA, cache e builds ficam fora do Git. Use a identidade configurada.
 
 ## Publicar uma release
@@ -30,7 +30,7 @@ dados, capturas QA, cache e builds ficam fora do Git. Use a identidade configura
 4. Publique uma release com a tag correspondente, por exemplo:
 
 ```powershell
-gh release create v0.2.0 --target main --title "EcoDeck 0.2.0" --notes-file docs/RELEASE-0.2.0.md --prerelease
+gh release create v0.3.0 --target main --title "CrashSounds 0.3.0" --notes-file docs/RELEASE-0.3.0.md --prerelease
 ```
 
 O workflow `release: published` anexa o instalador `*-setup.exe`, o ZIP, o SHA-256
@@ -42,16 +42,19 @@ Execução manual do workflow gera artifacts sem criar release.
 ## Continuar em outra sessão
 
 ```powershell
-git clone https://github.com/Toled0o/EcoDeck.git
-cd EcoDeck
+git clone https://github.com/Toled0o/CrashSounds.git
+cd CrashSounds
 git switch main
 ```
 
 Depois siga o README. Envie uma mensagem como:
 
-> Continue o EcoDeck em https://github.com/Toled0o/EcoDeck, branch main.
+> Continue o CrashSounds em https://github.com/Toled0o/CrashSounds, branch main.
 > Leia AGENTS.md e docs/STATUS.md. Quero alterar: [...].
 
 Em cópia existente, confira alterações antes de `git pull --ff-only`.
 Se for privado, conecte uma conta com acesso. Nunca envie tokens, o perfil real
 de `%LOCALAPPDATA%\EcoDeck` ou sons pessoais para o repositório.
+
+O checkout desta sessão permanece em D:\EcoDeck por compatibilidade com o ambiente
+virtual. Novas clonagens podem usar a pasta CrashSounds normalmente.
