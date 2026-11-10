@@ -20,3 +20,13 @@ data/
 *.flac
 qa-artifacts/
 .coverage
+
+# Mídias baixadas e partes temporárias não entram no repositório.
+*.mp4
+*.mkv
+*.webm
+*.m4a
+*.aac
+*.opus
+*.part
+*.ytdl

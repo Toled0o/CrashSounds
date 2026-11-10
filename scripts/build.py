@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import importlib.metadata as metadata
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -16,7 +17,21 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def run(command):
-    subprocess.run(command, cwd=ROOT, check=True)
+    environment = dict(os.environ)
+    smoke = "--smoke-test" in command
+    log = ROOT / "build" / "smoke-error.txt"
+    if smoke:
+        log.parent.mkdir(exist_ok=True)
+        log.unlink(missing_ok=True)
+        environment["CRASHSOUNDS_QA_LOG"] = str(log)
+    try:
+        subprocess.run(
+            command, cwd=ROOT, check=True, env=environment, timeout=300 if smoke else None
+        )
+    except subprocess.CalledProcessError:
+        if smoke and log.exists():
+            print(log.read_text(encoding="utf-8")[-5000:], file=sys.stderr)
+        raise
 
 
 def main():
@@ -27,6 +42,9 @@ def main():
     parser.add_argument("--portable-only", action="store_true", help="Não compilar instalador NSIS")
     args = parser.parse_args()
     output = args.output.resolve()
+    from prepare_media_tools import prepare
+
+    media = prepare()
     build = output.parent / "build"
     build.mkdir(parents=True, exist_ok=True)
     # Não limpa diretórios informados pelo usuário; PyInstaller atualiza apenas seu pacote.
@@ -63,10 +81,21 @@ def main():
             "soundfile",
             "--collect-all",
             "soxr",
+            "--collect-all",
+            "yt_dlp",
+            "--collect-all",
+            "yt_dlp_ejs",
+            "--recursive-copy-metadata",
+            "yt-dlp",
+            "--copy-metadata",
+            "yt-dlp-ejs",
             str(ROOT / "src" / "ecodeck" / "__main__.py"),
         ]
     )
     package = output / "CrashSounds"
+    shutil.copytree(media, package / "tools" / "media", dirs_exist_ok=True)
+    shutil.copy2(ROOT / "scripts" / "media-tools.json", package / "MEDIA_TOOLS.json")
+    shutil.copy2(ROOT / "scripts" / "media-tools.json", output / "MEDIA_TOOLS.json")
     for name in ("LICENSE", "README.md", "THIRD_PARTY_NOTICES.md", "CHANGELOG.md"):
         shutil.copy2(ROOT / name, package / name)
     shutil.copytree(ROOT / "docs", package / "docs", dirs_exist_ok=True)
@@ -86,6 +115,17 @@ def main():
         "cffi",
         "pycparser",
         "pyinstaller",
+        "yt-dlp",
+        "yt-dlp-ejs",
+        "requests",
+        "urllib3",
+        "certifi",
+        "idna",
+        "charset-normalizer",
+        "brotli",
+        "mutagen",
+        "pycryptodomex",
+        "websockets",
     )
     for name in names:
         distribution = metadata.distribution(name)
