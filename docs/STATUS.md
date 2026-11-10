@@ -1,7 +1,7 @@
 # Estado atual — EcoDeck
 
 Atualizado em 10/11/2026. Projeto independente, repositório Toled0o/EcoDeck.
-Versão 0.2.0 preparada para pré-release; 0.1.0 já publicada.
+Versão 0.2.0 publicada como pré-release; 0.1.0 preservada no histórico.
 
 ## Implementado
 
@@ -79,5 +79,9 @@ foram comparadas antes/depois, sem alterações pela execução QA.
 A invocação /D do NSIS exige caminho final sem aspas; o QA usa também destino
 obrigatório por variável de ambiente para nunca cair na instalação padrão.
 Download 0.2.0: https://github.com/Toled0o/EcoDeck/releases/tag/v0.2.0.
-Conferir conclusão do workflow e os anexos antes de anunciar a distribuição.
+Workflow de distribuição concluído com sucesso:
+https://github.com/Toled0o/EcoDeck/actions/runs/42849866887.
+Instalador, ZIP portátil, SHA256SUMS.txt e BUILD_TOOLS.json anexados à 0.2.0.
+Os mesmos testes e o smoke de instalação/desinstalação passaram no GitHub.
+Os testes interativos e auditivos listados em TESTING.md continuam pendentes.
 O workflow da 0.1.0 terminou com sucesso e anexou ZIP/checksum.
